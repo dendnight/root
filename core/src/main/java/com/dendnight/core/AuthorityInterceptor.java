@@ -46,6 +46,12 @@ public class AuthorityInterceptor extends AbstractInterceptor {
 		return invocation.invoke();
 	}
 
+	/**
+	 * 验证Ajax请求
+	 * 
+	 * @param request
+	 * @return
+	 */
 	private boolean isAjaxRequest(HttpServletRequest request) {
 		String header = request.getHeader("X-Requested-With");
 		if (header != null && "XMLHttpRequest".equals(header)) {
