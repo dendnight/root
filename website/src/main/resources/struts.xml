@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<!-- Constants -->
+	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.action.extension" value="htm" />
+	<constant name="struts.serve.static" value="true" />
+	<constant name="struts.serve.static.browserCache" value="false" />
+	<constant name="struts.multipart.maxSize" value="1002097152" />
+	<constant name="struts.ui.theme" value="simple" />
+	<constant name="struts.enable.SlashesInActionNames" value="true" />
+	<constant name="struts.multipart.parser"
+		value="com.dendnight.gallery.extend.UploadMultiPartRequest" />
+
+	<constant name="struts.devMode" value="true" /> 
+	<!-- 提供json 格式的支持 -->
+	<package name="default" extends="json-default">
+
+		<interceptors>
+			<interceptor name="authority"
+				class="com.dendnight.base.AuthorityInterceptor" />
+			<interceptor-stack name="baseInterceptorStack">
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="authority" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="baseInterceptorStack"></default-interceptor-ref>
+		<global-results>
+			<!-- 返回json -->
+			<result name="json" type="json">
+				<param name="root">json</param>
+			</result>
+			<!-- 超时 -->
+			<result name="timeout" type="redirect">/index.html</result>
+		</global-results>
+
+	</package>
+
+	<!-- 导入配置 -->
+	<include file="struts-core.xml" />
+	<include file="struts-gallery.xml" />
+
+</struts>

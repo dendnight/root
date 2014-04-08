@@ -24,20 +24,20 @@ import com.dendnight.core.domain.UserInf;
 public interface AccountService {
 
 	/**
-	 * 注册用户信息
+	 * 创建帐号
 	 * 
 	 * @param info
 	 * @param userInf
 	 */
-	void register(LoginInfo info, UserInf userInf);
+	void create(LoginInfo info, UserInf userInf);
 
 	/**
-	 * 注销
+	 * 注销帐号
 	 * 
 	 * @param info
 	 * @param id
 	 */
-	void deactivate(LoginInfo info, int id);
+	void delete(LoginInfo info, int id);
 
 	/**
 	 * 修改帐号信息
@@ -48,10 +48,10 @@ public interface AccountService {
 	void update(LoginInfo info, AccountInf accountInf);
 
 	/**
-	 * 登录
+	 * 查询帐号
 	 * 
 	 * @param accountInf
 	 * @return
 	 */
-	UserInf login(AccountInf accountInf);
+	UserInf query(AccountInf accountInf);
 }
