@@ -11,13 +11,19 @@
 	<name>root</name>
 	<url>http://maven.apache.org</url>
 
+	<modules>
+		<module>gallery</module>
+		<module>core</module>
+		<module>admin</module>
+	</modules>
+
 	<properties>
 		<!--指定Maven用什么编码来读取源码及文档 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!--指定Maven用什么编码来呈现站点的HTML文件 -->
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -141,11 +147,5 @@
 			<version>1.7.4</version>
 		</dependency>
 	</dependencies>
-	
-	<modules>
-		<module>gallery</module>
-		<module>core</module>
-		<module>blog</module>
-		<module>admin</module>
-	</modules>
+
 </project>
