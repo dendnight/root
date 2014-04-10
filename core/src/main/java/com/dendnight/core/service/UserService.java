@@ -25,7 +25,7 @@ import com.dendnight.core.domain.UserInf;
 public interface UserService {
 
 	/**
-	 * 修改用户信息
+	 * 修改用户信息，删除的不能修改，不能修改成删除
 	 * 
 	 * @param info
 	 * @param userInf
@@ -33,7 +33,16 @@ public interface UserService {
 	void update(LoginInfo info, UserInf userInf);
 
 	/**
-	 * 用户列表
+	 * 查询用户信息，排除已删除的
+	 * 
+	 * @param info
+	 * @param id
+	 * @return
+	 */
+	UserInf query(LoginInfo info, int id);
+
+	/**
+	 * 用户列表，排除已删除的
 	 * 
 	 * @param info
 	 * @param userInfCriteria

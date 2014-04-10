@@ -5,7 +5,7 @@ import com.dendnight.core.domain.AccountInf;
 import com.dendnight.core.domain.UserInf;
 
 /**
- * 帐号管理
+ * 帐号信息
  * 
  * <pre>
  * Description
@@ -26,18 +26,19 @@ public interface AccountService {
 	/**
 	 * 创建帐号
 	 * 
-	 * @param info
 	 * @param userInf
+	 * @param password
 	 */
-	void create(LoginInfo info, UserInf userInf);
+	int create(UserInf userInf, String password);
 
 	/**
 	 * 注销帐号
 	 * 
 	 * @param info
 	 * @param id
+	 * @throws Exception
 	 */
-	void delete(LoginInfo info, int id);
+	void delete(LoginInfo info);
 
 	/**
 	 * 修改帐号信息
@@ -53,5 +54,5 @@ public interface AccountService {
 	 * @param accountInf
 	 * @return
 	 */
-	UserInf query(AccountInf accountInf);
+	AccountInf query(AccountInf accountInf);
 }

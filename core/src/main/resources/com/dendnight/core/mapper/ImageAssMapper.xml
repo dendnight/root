@@ -1,34 +1,34 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dendnight.core.mapper.ImageAssMapper">
-  <resultMap id="BaseResultMap" type="com.dendnight.core.domain.ImageAss">
-    <id column="image_ass_id" jdbcType="INTEGER" property="id" />
-    <result column="image_ass_user_id" jdbcType="INTEGER" property="userId" />
-    <result column="image_ass_image_id" jdbcType="VARCHAR" property="imageId" />
-    <result column="image_ass_created_time" jdbcType="TIMESTAMP" property="createdTime" />
-    <result column="image_ass_created_by" jdbcType="INTEGER" property="createdBy" />
-    <result column="image_ass_updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
-    <result column="image_ass_updated_by" jdbcType="INTEGER" property="updatedBy" />
-    <result column="image_ass_deleted" jdbcType="INTEGER" property="deleted" />
-    <result column="image_ass_versoin" jdbcType="INTEGER" property="versoin" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dendnight.core.mapper.ImageAssMapper" >
+  <resultMap id="BaseResultMap" type="com.dendnight.core.domain.ImageAss" >
+    <id column="image_ass_id" property="id" jdbcType="INTEGER" />
+    <result column="image_ass_user_id" property="userId" jdbcType="INTEGER" />
+    <result column="image_ass_image_id" property="imageId" jdbcType="VARCHAR" />
+    <result column="image_ass_created_time" property="createdTime" jdbcType="TIMESTAMP" />
+    <result column="image_ass_created_by" property="createdBy" jdbcType="INTEGER" />
+    <result column="image_ass_updated_time" property="updatedTime" jdbcType="TIMESTAMP" />
+    <result column="image_ass_updated_by" property="updatedBy" jdbcType="INTEGER" />
+    <result column="image_ass_deleted" property="deleted" jdbcType="INTEGER" />
+    <result column="image_ass_versoin" property="versoin" jdbcType="INTEGER" />
   </resultMap>
-  <sql id="Base_Column_List">
+  <sql id="Base_Column_List" >
     image_ass.id as image_ass_id, image_ass.user_id as image_ass_user_id, image_ass.image_id as image_ass_image_id, 
     image_ass.created_time as image_ass_created_time, image_ass.created_by as image_ass_created_by, 
     image_ass.updated_time as image_ass_updated_time, image_ass.updated_by as image_ass_updated_by, 
     image_ass.deleted as image_ass_deleted, image_ass.versoin as image_ass_versoin
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from image_ass image_ass
     where image_ass.id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from image_ass
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyProperty="id" parameterType="com.dendnight.core.domain.ImageAss" useGeneratedKeys="true">
+  <insert id="insert" parameterType="com.dendnight.core.domain.ImageAss" useGeneratedKeys="true" keyProperty="id" >
     insert into image_ass (user_id, image_id, created_time, 
       created_by, updated_time, updated_by, 
       deleted, versoin)
@@ -36,92 +36,92 @@
       #{createdBy,jdbcType=INTEGER}, #{updatedTime,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=INTEGER}, 
       #{deleted,jdbcType=INTEGER}, #{versoin,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" keyProperty="id" parameterType="com.dendnight.core.domain.ImageAss" useGeneratedKeys="true">
+  <insert id="insertSelective" parameterType="com.dendnight.core.domain.ImageAss" useGeneratedKeys="true" keyProperty="id" >
     insert into image_ass
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
         user_id,
       </if>
-      <if test="imageId != null">
+      <if test="imageId != null" >
         image_id,
       </if>
-      <if test="createdTime != null">
+      <if test="createdTime != null" >
         created_time,
       </if>
-      <if test="createdBy != null">
+      <if test="createdBy != null" >
         created_by,
       </if>
-      <if test="updatedTime != null">
+      <if test="updatedTime != null" >
         updated_time,
       </if>
-      <if test="updatedBy != null">
+      <if test="updatedBy != null" >
         updated_by,
       </if>
-      <if test="deleted != null">
+      <if test="deleted != null" >
         deleted,
       </if>
-      <if test="versoin != null">
+      <if test="versoin != null" >
         versoin,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
         #{userId,jdbcType=INTEGER},
       </if>
-      <if test="imageId != null">
+      <if test="imageId != null" >
         #{imageId,jdbcType=VARCHAR},
       </if>
-      <if test="createdTime != null">
+      <if test="createdTime != null" >
         #{createdTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="createdBy != null">
+      <if test="createdBy != null" >
         #{createdBy,jdbcType=INTEGER},
       </if>
-      <if test="updatedTime != null">
+      <if test="updatedTime != null" >
         #{updatedTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updatedBy != null">
+      <if test="updatedBy != null" >
         #{updatedBy,jdbcType=INTEGER},
       </if>
-      <if test="deleted != null">
+      <if test="deleted != null" >
         #{deleted,jdbcType=INTEGER},
       </if>
-      <if test="versoin != null">
+      <if test="versoin != null" >
         #{versoin,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.dendnight.core.domain.ImageAss">
+  <update id="updateByPrimaryKeySelective" parameterType="com.dendnight.core.domain.ImageAss" >
     update image_ass
-    <set>
-      <if test="userId != null">
+    <set >
+      <if test="userId != null" >
         user_id = #{userId,jdbcType=INTEGER},
       </if>
-      <if test="imageId != null">
+      <if test="imageId != null" >
         image_id = #{imageId,jdbcType=VARCHAR},
       </if>
-      <if test="createdTime != null">
+      <if test="createdTime != null" >
         created_time = #{createdTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="createdBy != null">
+      <if test="createdBy != null" >
         created_by = #{createdBy,jdbcType=INTEGER},
       </if>
-      <if test="updatedTime != null">
+      <if test="updatedTime != null" >
         updated_time = #{updatedTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updatedBy != null">
+      <if test="updatedBy != null" >
         updated_by = #{updatedBy,jdbcType=INTEGER},
       </if>
-      <if test="deleted != null">
+      <if test="deleted != null" >
         deleted = #{deleted,jdbcType=INTEGER},
       </if>
-      <if test="versoin != null">
+      <if test="versoin != null" >
         versoin = #{versoin,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.dendnight.core.domain.ImageAss">
+  <update id="updateByPrimaryKey" parameterType="com.dendnight.core.domain.ImageAss" >
     update image_ass
     set user_id = #{userId,jdbcType=INTEGER},
       image_id = #{imageId,jdbcType=VARCHAR},

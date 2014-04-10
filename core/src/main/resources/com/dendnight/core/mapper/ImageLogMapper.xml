@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.dendnight.core.mapper.AccessLogMapper" >
-  <resultMap id="BaseResultMap" type="com.dendnight.core.domain.AccessLog" >
-    <id column="access_log_id" property="id" jdbcType="INTEGER" />
-    <result column="access_log_user_id" property="userId" jdbcType="INTEGER" />
-    <result column="access_log_ip" property="ip" jdbcType="VARCHAR" />
-    <result column="access_log_device" property="device" jdbcType="VARCHAR" />
-    <result column="access_log_time" property="time" jdbcType="TIMESTAMP" />
-    <result column="access_log_browser" property="browser" jdbcType="VARCHAR" />
-    <result column="access_log_os" property="os" jdbcType="VARCHAR" />
-    <result column="access_log_details" property="details" jdbcType="VARCHAR" />
+<mapper namespace="com.dendnight.core.mapper.ImageLogMapper" >
+  <resultMap id="BaseResultMap" type="com.dendnight.core.domain.ImageLog" >
+    <id column="image_log_id" property="id" jdbcType="INTEGER" />
+    <result column="image_log_image_id" property="imageId" jdbcType="VARCHAR" />
+    <result column="image_log_ip" property="ip" jdbcType="VARCHAR" />
+    <result column="image_log_device" property="device" jdbcType="VARCHAR" />
+    <result column="image_log_time" property="time" jdbcType="TIMESTAMP" />
+    <result column="image_log_browser" property="browser" jdbcType="VARCHAR" />
+    <result column="image_log_os" property="os" jdbcType="VARCHAR" />
+    <result column="image_log_details" property="details" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    access_log.id as access_log_id, access_log.user_id as access_log_user_id, access_log.ip as access_log_ip, 
-    access_log.device as access_log_device, access_log.time as access_log_time, access_log.browser as access_log_browser, 
-    access_log.os as access_log_os, access_log.details as access_log_details
+    image_log.id as image_log_id, image_log.image_id as image_log_image_id, image_log.ip as image_log_ip, 
+    image_log.device as image_log_device, image_log.time as image_log_time, image_log.browser as image_log_browser, 
+    image_log.os as image_log_os, image_log.details as image_log_details
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from access_log access_log
-    where access_log.id = #{id,jdbcType=INTEGER}
+    from image_log image_log
+    where image_log.id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from access_log
+    delete from image_log
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.dendnight.core.domain.AccessLog" useGeneratedKeys="true" keyProperty="id" >
-    insert into access_log (user_id, ip, device, 
+  <insert id="insert" parameterType="com.dendnight.core.domain.ImageLog" useGeneratedKeys="true" keyProperty="id" >
+    insert into image_log (image_id, ip, device, 
       time, browser, os, 
       details)
-    values (#{userId,jdbcType=INTEGER}, #{ip,jdbcType=VARCHAR}, #{device,jdbcType=VARCHAR}, 
+    values (#{imageId,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{device,jdbcType=VARCHAR}, 
       #{time,jdbcType=TIMESTAMP}, #{browser,jdbcType=VARCHAR}, #{os,jdbcType=VARCHAR}, 
       #{details,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.dendnight.core.domain.AccessLog" useGeneratedKeys="true" keyProperty="id" >
-    insert into access_log
+  <insert id="insertSelective" parameterType="com.dendnight.core.domain.ImageLog" useGeneratedKeys="true" keyProperty="id" >
+    insert into image_log
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="userId != null" >
-        user_id,
+      <if test="imageId != null" >
+        image_id,
       </if>
       <if test="ip != null" >
         ip,
@@ -60,8 +60,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="userId != null" >
-        #{userId,jdbcType=INTEGER},
+      <if test="imageId != null" >
+        #{imageId,jdbcType=VARCHAR},
       </if>
       <if test="ip != null" >
         #{ip,jdbcType=VARCHAR},
@@ -83,11 +83,11 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.dendnight.core.domain.AccessLog" >
-    update access_log
+  <update id="updateByPrimaryKeySelective" parameterType="com.dendnight.core.domain.ImageLog" >
+    update image_log
     <set >
-      <if test="userId != null" >
-        user_id = #{userId,jdbcType=INTEGER},
+      <if test="imageId != null" >
+        image_id = #{imageId,jdbcType=VARCHAR},
       </if>
       <if test="ip != null" >
         ip = #{ip,jdbcType=VARCHAR},
@@ -110,9 +110,9 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.dendnight.core.domain.AccessLog" >
-    update access_log
-    set user_id = #{userId,jdbcType=INTEGER},
+  <update id="updateByPrimaryKey" parameterType="com.dendnight.core.domain.ImageLog" >
+    update image_log
+    set image_id = #{imageId,jdbcType=VARCHAR},
       ip = #{ip,jdbcType=VARCHAR},
       device = #{device,jdbcType=VARCHAR},
       time = #{time,jdbcType=TIMESTAMP},

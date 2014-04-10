@@ -1,27 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dendnight.core.mapper.ImageInfMapper">
-  <resultMap id="BaseResultMap" type="com.dendnight.core.domain.ImageInf">
-    <id column="image_inf_id" jdbcType="VARCHAR" property="id" />
-    <result column="image_inf_height" jdbcType="INTEGER" property="height" />
-    <result column="image_inf_width" jdbcType="INTEGER" property="width" />
-    <result column="image_inf_path" jdbcType="VARCHAR" property="path" />
-    <result column="image_inf_longitude" jdbcType="DOUBLE" property="longitude" />
-    <result column="image_inf_latitude" jdbcType="DOUBLE" property="latitude" />
-    <result column="image_inf_readme" jdbcType="VARCHAR" property="readme" />
-    <result column="image_inf_camera_model" jdbcType="VARCHAR" property="cameraModel" />
-    <result column="image_inf_camera_brand" jdbcType="VARCHAR" property="cameraBrand" />
-    <result column="image_inf_lens_brand" jdbcType="VARCHAR" property="lensBrand" />
-    <result column="image_inf_date_taken" jdbcType="TIMESTAMP" property="dateTaken" />
-    <result column="image_inf_lens_model" jdbcType="VARCHAR" property="lensModel" />
-    <result column="image_inf_program_name" jdbcType="VARCHAR" property="programName" />
-    <result column="image_inf_created_time" jdbcType="TIMESTAMP" property="createdTime" />
-    <result column="image_inf_updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
-    <result column="image_inf_updated_by" jdbcType="INTEGER" property="updatedBy" />
-    <result column="image_inf_deleted" jdbcType="TINYINT" property="deleted" />
-    <result column="image_inf_version" jdbcType="INTEGER" property="version" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dendnight.core.mapper.ImageInfMapper" >
+  <resultMap id="BaseResultMap" type="com.dendnight.core.domain.ImageInf" >
+    <id column="image_inf_id" property="id" jdbcType="VARCHAR" />
+    <result column="image_inf_height" property="height" jdbcType="INTEGER" />
+    <result column="image_inf_width" property="width" jdbcType="INTEGER" />
+    <result column="image_inf_path" property="path" jdbcType="VARCHAR" />
+    <result column="image_inf_longitude" property="longitude" jdbcType="DOUBLE" />
+    <result column="image_inf_latitude" property="latitude" jdbcType="DOUBLE" />
+    <result column="image_inf_readme" property="readme" jdbcType="VARCHAR" />
+    <result column="image_inf_camera_model" property="cameraModel" jdbcType="VARCHAR" />
+    <result column="image_inf_camera_brand" property="cameraBrand" jdbcType="VARCHAR" />
+    <result column="image_inf_lens_brand" property="lensBrand" jdbcType="VARCHAR" />
+    <result column="image_inf_date_taken" property="dateTaken" jdbcType="TIMESTAMP" />
+    <result column="image_inf_lens_model" property="lensModel" jdbcType="VARCHAR" />
+    <result column="image_inf_program_name" property="programName" jdbcType="VARCHAR" />
+    <result column="image_inf_created_time" property="createdTime" jdbcType="TIMESTAMP" />
+    <result column="image_inf_updated_time" property="updatedTime" jdbcType="TIMESTAMP" />
+    <result column="image_inf_updated_by" property="updatedBy" jdbcType="INTEGER" />
+    <result column="image_inf_deleted" property="deleted" jdbcType="TINYINT" />
+    <result column="image_inf_version" property="version" jdbcType="INTEGER" />
   </resultMap>
-  <sql id="Base_Column_List">
+  <sql id="Base_Column_List" >
     image_inf.id as image_inf_id, image_inf.height as image_inf_height, image_inf.width as image_inf_width, 
     image_inf.path as image_inf_path, image_inf.longitude as image_inf_longitude, image_inf.latitude as image_inf_latitude, 
     image_inf.readme as image_inf_readme, image_inf.camera_model as image_inf_camera_model, 
@@ -31,17 +31,17 @@
     image_inf.updated_time as image_inf_updated_time, image_inf.updated_by as image_inf_updated_by, 
     image_inf.deleted as image_inf_deleted, image_inf.version as image_inf_version
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from image_inf image_inf
     where image_inf.id = #{id,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from image_inf
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.dendnight.core.domain.ImageInf">
+  <insert id="insert" parameterType="com.dendnight.core.domain.ImageInf" >
     insert into image_inf (id, height, width, 
       path, longitude, latitude, 
       readme, camera_model, camera_brand, 
@@ -57,179 +57,179 @@
       #{updatedBy,jdbcType=INTEGER}, #{deleted,jdbcType=TINYINT}, #{version,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.dendnight.core.domain.ImageInf">
+  <insert id="insertSelective" parameterType="com.dendnight.core.domain.ImageInf" >
     insert into image_inf
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
         id,
       </if>
-      <if test="height != null">
+      <if test="height != null" >
         height,
       </if>
-      <if test="width != null">
+      <if test="width != null" >
         width,
       </if>
-      <if test="path != null">
+      <if test="path != null" >
         path,
       </if>
-      <if test="longitude != null">
+      <if test="longitude != null" >
         longitude,
       </if>
-      <if test="latitude != null">
+      <if test="latitude != null" >
         latitude,
       </if>
-      <if test="readme != null">
+      <if test="readme != null" >
         readme,
       </if>
-      <if test="cameraModel != null">
+      <if test="cameraModel != null" >
         camera_model,
       </if>
-      <if test="cameraBrand != null">
+      <if test="cameraBrand != null" >
         camera_brand,
       </if>
-      <if test="lensBrand != null">
+      <if test="lensBrand != null" >
         lens_brand,
       </if>
-      <if test="dateTaken != null">
+      <if test="dateTaken != null" >
         date_taken,
       </if>
-      <if test="lensModel != null">
+      <if test="lensModel != null" >
         lens_model,
       </if>
-      <if test="programName != null">
+      <if test="programName != null" >
         program_name,
       </if>
-      <if test="createdTime != null">
+      <if test="createdTime != null" >
         created_time,
       </if>
-      <if test="updatedTime != null">
+      <if test="updatedTime != null" >
         updated_time,
       </if>
-      <if test="updatedBy != null">
+      <if test="updatedBy != null" >
         updated_by,
       </if>
-      <if test="deleted != null">
+      <if test="deleted != null" >
         deleted,
       </if>
-      <if test="version != null">
+      <if test="version != null" >
         version,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
         #{id,jdbcType=VARCHAR},
       </if>
-      <if test="height != null">
+      <if test="height != null" >
         #{height,jdbcType=INTEGER},
       </if>
-      <if test="width != null">
+      <if test="width != null" >
         #{width,jdbcType=INTEGER},
       </if>
-      <if test="path != null">
+      <if test="path != null" >
         #{path,jdbcType=VARCHAR},
       </if>
-      <if test="longitude != null">
+      <if test="longitude != null" >
         #{longitude,jdbcType=DOUBLE},
       </if>
-      <if test="latitude != null">
+      <if test="latitude != null" >
         #{latitude,jdbcType=DOUBLE},
       </if>
-      <if test="readme != null">
+      <if test="readme != null" >
         #{readme,jdbcType=VARCHAR},
       </if>
-      <if test="cameraModel != null">
+      <if test="cameraModel != null" >
         #{cameraModel,jdbcType=VARCHAR},
       </if>
-      <if test="cameraBrand != null">
+      <if test="cameraBrand != null" >
         #{cameraBrand,jdbcType=VARCHAR},
       </if>
-      <if test="lensBrand != null">
+      <if test="lensBrand != null" >
         #{lensBrand,jdbcType=VARCHAR},
       </if>
-      <if test="dateTaken != null">
+      <if test="dateTaken != null" >
         #{dateTaken,jdbcType=TIMESTAMP},
       </if>
-      <if test="lensModel != null">
+      <if test="lensModel != null" >
         #{lensModel,jdbcType=VARCHAR},
       </if>
-      <if test="programName != null">
+      <if test="programName != null" >
         #{programName,jdbcType=VARCHAR},
       </if>
-      <if test="createdTime != null">
+      <if test="createdTime != null" >
         #{createdTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updatedTime != null">
+      <if test="updatedTime != null" >
         #{updatedTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updatedBy != null">
+      <if test="updatedBy != null" >
         #{updatedBy,jdbcType=INTEGER},
       </if>
-      <if test="deleted != null">
+      <if test="deleted != null" >
         #{deleted,jdbcType=TINYINT},
       </if>
-      <if test="version != null">
+      <if test="version != null" >
         #{version,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.dendnight.core.domain.ImageInf">
+  <update id="updateByPrimaryKeySelective" parameterType="com.dendnight.core.domain.ImageInf" >
     update image_inf
-    <set>
-      <if test="height != null">
+    <set >
+      <if test="height != null" >
         height = #{height,jdbcType=INTEGER},
       </if>
-      <if test="width != null">
+      <if test="width != null" >
         width = #{width,jdbcType=INTEGER},
       </if>
-      <if test="path != null">
+      <if test="path != null" >
         path = #{path,jdbcType=VARCHAR},
       </if>
-      <if test="longitude != null">
+      <if test="longitude != null" >
         longitude = #{longitude,jdbcType=DOUBLE},
       </if>
-      <if test="latitude != null">
+      <if test="latitude != null" >
         latitude = #{latitude,jdbcType=DOUBLE},
       </if>
-      <if test="readme != null">
+      <if test="readme != null" >
         readme = #{readme,jdbcType=VARCHAR},
       </if>
-      <if test="cameraModel != null">
+      <if test="cameraModel != null" >
         camera_model = #{cameraModel,jdbcType=VARCHAR},
       </if>
-      <if test="cameraBrand != null">
+      <if test="cameraBrand != null" >
         camera_brand = #{cameraBrand,jdbcType=VARCHAR},
       </if>
-      <if test="lensBrand != null">
+      <if test="lensBrand != null" >
         lens_brand = #{lensBrand,jdbcType=VARCHAR},
       </if>
-      <if test="dateTaken != null">
+      <if test="dateTaken != null" >
         date_taken = #{dateTaken,jdbcType=TIMESTAMP},
       </if>
-      <if test="lensModel != null">
+      <if test="lensModel != null" >
         lens_model = #{lensModel,jdbcType=VARCHAR},
       </if>
-      <if test="programName != null">
+      <if test="programName != null" >
         program_name = #{programName,jdbcType=VARCHAR},
       </if>
-      <if test="createdTime != null">
+      <if test="createdTime != null" >
         created_time = #{createdTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updatedTime != null">
+      <if test="updatedTime != null" >
         updated_time = #{updatedTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updatedBy != null">
+      <if test="updatedBy != null" >
         updated_by = #{updatedBy,jdbcType=INTEGER},
       </if>
-      <if test="deleted != null">
+      <if test="deleted != null" >
         deleted = #{deleted,jdbcType=TINYINT},
       </if>
-      <if test="version != null">
+      <if test="version != null" >
         version = #{version,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.dendnight.core.domain.ImageInf">
+  <update id="updateByPrimaryKey" parameterType="com.dendnight.core.domain.ImageInf" >
     update image_inf
     set height = #{height,jdbcType=INTEGER},
       width = #{width,jdbcType=INTEGER},

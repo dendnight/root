@@ -35,6 +35,12 @@ public class LoginInfo implements Serializable {
 	/** 类型 */
 	private String usertype;
 
+	/** IP地址 */
+	private String ip;
+
+	/** 请求头 */
+	private String header;
+
 	public Integer getId() {
 		return id;
 	}
@@ -67,10 +73,34 @@ public class LoginInfo implements Serializable {
 		this.usertype = usertype;
 	}
 
-	@Override
-	public String toString() {
-		return "LoginInfo [id=" + id + ", nickname=" + nickname + ", username=" + username + ", usertype=" + usertype
-				+ "]";
+	/**
+	 * @return the {@link #ip}
+	 */
+	public String getIp() {
+		return ip;
+	}
+
+	/**
+	 * @param ip
+	 *            the {@link #ip} to set
+	 */
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
+	/**
+	 * @return the {@link #header}
+	 */
+	public String getHeader() {
+		return header;
+	}
+
+	/**
+	 * @param header
+	 *            the {@link #header} to set
+	 */
+	public void setHeader(String header) {
+		this.header = header;
 	}
 
 }
