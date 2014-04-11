@@ -29,7 +29,7 @@ public interface AccountService {
 	 * @param userInf
 	 * @param password
 	 */
-	int create(UserInf userInf, String password);
+	int register(UserInf userInf, String password);
 
 	/**
 	 * 注销帐号
@@ -38,7 +38,7 @@ public interface AccountService {
 	 * @param id
 	 * @throws Exception
 	 */
-	void delete(LoginInfo info);
+	void unsubscribe(LoginInfo info);
 
 	/**
 	 * 修改帐号信息
@@ -49,10 +49,11 @@ public interface AccountService {
 	void update(LoginInfo info, AccountInf accountInf);
 
 	/**
-	 * 查询帐号
+	 * 登录
 	 * 
 	 * @param accountInf
 	 * @return
+	 * @throws Exception
 	 */
-	AccountInf query(AccountInf accountInf);
+	UserInf login(String username, String password) throws Exception;
 }

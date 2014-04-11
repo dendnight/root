@@ -15,6 +15,8 @@ public class UserInf {
 
     private Integer gender;
 
+    private String userType;
+
     private Date birthday;
 
     private String readme;
@@ -77,6 +79,14 @@ public class UserInf {
 
     public void setGender(Integer gender) {
         this.gender = gender;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType == null ? null : userType.trim();
     }
 
     public Date getBirthday() {

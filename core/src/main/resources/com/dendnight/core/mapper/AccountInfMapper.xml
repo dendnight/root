@@ -5,8 +5,8 @@
     <id column="account_inf_user_id" property="userId" jdbcType="INTEGER" />
     <result column="account_inf_username" property="username" jdbcType="VARCHAR" />
     <result column="account_inf_password" property="password" jdbcType="VARCHAR" />
-    <result column="account_inf_user_type" property="userType" jdbcType="VARCHAR" />
     <result column="account_inf_count" property="count" jdbcType="INTEGER" />
+    <result column="account_inf_last_time" property="lastTime" jdbcType="TIMESTAMP" />
     <result column="account_inf_created_time" property="createdTime" jdbcType="TIMESTAMP" />
     <result column="account_inf_created_by" property="createdBy" jdbcType="INTEGER" />
     <result column="account_inf_updated_time" property="updatedTime" jdbcType="TIMESTAMP" />
@@ -16,8 +16,8 @@
   </resultMap>
   <sql id="Base_Column_List" >
     account_inf.user_id as account_inf_user_id, account_inf.username as account_inf_username, 
-    account_inf.password as account_inf_password, account_inf.user_type as account_inf_user_type, 
-    account_inf.count as account_inf_count, account_inf.created_time as account_inf_created_time, 
+    account_inf.password as account_inf_password, account_inf.count as account_inf_count, 
+    account_inf.last_time as account_inf_last_time, account_inf.created_time as account_inf_created_time, 
     account_inf.created_by as account_inf_created_by, account_inf.updated_time as account_inf_updated_time, 
     account_inf.updated_by as account_inf_updated_by, account_inf.deleted as account_inf_deleted, 
     account_inf.version as account_inf_version
@@ -34,11 +34,11 @@
   </delete>
   <insert id="insert" parameterType="com.dendnight.core.domain.AccountInf" >
     insert into account_inf (user_id, username, password, 
-      user_type, count, created_time, 
+      count, last_time, created_time, 
       created_by, updated_time, updated_by, 
       deleted, version)
     values (#{userId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{userType,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER}, #{createdTime,jdbcType=TIMESTAMP}, 
+      #{count,jdbcType=INTEGER}, #{lastTime,jdbcType=TIMESTAMP}, #{createdTime,jdbcType=TIMESTAMP}, 
       #{createdBy,jdbcType=INTEGER}, #{updatedTime,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=INTEGER}, 
       #{deleted,jdbcType=TINYINT}, #{version,jdbcType=INTEGER})
   </insert>
@@ -54,11 +54,11 @@
       <if test="password != null" >
         password,
       </if>
-      <if test="userType != null" >
-        user_type,
-      </if>
       <if test="count != null" >
         count,
+      </if>
+      <if test="lastTime != null" >
+        last_time,
       </if>
       <if test="createdTime != null" >
         created_time,
@@ -89,11 +89,11 @@
       <if test="password != null" >
         #{password,jdbcType=VARCHAR},
       </if>
-      <if test="userType != null" >
-        #{userType,jdbcType=VARCHAR},
-      </if>
       <if test="count != null" >
         #{count,jdbcType=INTEGER},
+      </if>
+      <if test="lastTime != null" >
+        #{lastTime,jdbcType=TIMESTAMP},
       </if>
       <if test="createdTime != null" >
         #{createdTime,jdbcType=TIMESTAMP},
@@ -124,11 +124,11 @@
       <if test="password != null" >
         password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="userType != null" >
-        user_type = #{userType,jdbcType=VARCHAR},
-      </if>
       <if test="count != null" >
         count = #{count,jdbcType=INTEGER},
+      </if>
+      <if test="lastTime != null" >
+        last_time = #{lastTime,jdbcType=TIMESTAMP},
       </if>
       <if test="createdTime != null" >
         created_time = #{createdTime,jdbcType=TIMESTAMP},
@@ -155,8 +155,8 @@
     update account_inf
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
-      user_type = #{userType,jdbcType=VARCHAR},
       count = #{count,jdbcType=INTEGER},
+      last_time = #{lastTime,jdbcType=TIMESTAMP},
       created_time = #{createdTime,jdbcType=TIMESTAMP},
       created_by = #{createdBy,jdbcType=INTEGER},
       updated_time = #{updatedTime,jdbcType=TIMESTAMP},
@@ -165,4 +165,11 @@
       version = #{version,jdbcType=INTEGER}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
+  
+  <select id="login" parameterType="map" resultMap="BaseResultMap">
+      select 
+    <include refid="Base_Column_List" />
+    from account_inf account_inf where 
+    account_inf.username = #{username} and account_inf.password = #{password}
+  </select>
 </mapper>

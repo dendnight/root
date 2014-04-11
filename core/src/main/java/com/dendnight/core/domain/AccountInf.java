@@ -9,9 +9,9 @@ public class AccountInf {
 
     private String password;
 
-    private String userType;
-
     private Integer count;
+
+    private Date lastTime;
 
     private Date createdTime;
 
@@ -49,20 +49,20 @@ public class AccountInf {
         this.password = password == null ? null : password.trim();
     }
 
-    public String getUserType() {
-        return userType;
-    }
-
-    public void setUserType(String userType) {
-        this.userType = userType == null ? null : userType.trim();
-    }
-
     public Integer getCount() {
         return count;
     }
 
     public void setCount(Integer count) {
         this.count = count;
+    }
+
+    public Date getLastTime() {
+        return lastTime;
+    }
+
+    public void setLastTime(Date lastTime) {
+        this.lastTime = lastTime;
     }
 
     public Date getCreatedTime() {

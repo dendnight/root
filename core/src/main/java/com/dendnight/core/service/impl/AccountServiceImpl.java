@@ -5,6 +5,8 @@ import java.util.Date;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.dendnight.core.LoginInfo;
 import com.dendnight.core.Md5Utils;
@@ -40,8 +42,9 @@ public class AccountServiceImpl implements AccountService {
 	@Autowired
 	private UserInfMapper userInfMapper;
 
+	@Transactional(propagation = Propagation.MANDATORY)
 	@Override
-	public int create(UserInf userInf, String password) {
+	public int register(UserInf userInf, String password) {
 
 		userInfMapper.insertSelective(userInf);
 
@@ -54,8 +57,9 @@ public class AccountServiceImpl implements AccountService {
 		return userInf.getId();
 	}
 
+	@Transactional(propagation = Propagation.MANDATORY)
 	@Override
-	public void delete(LoginInfo info) {
+	public void unsubscribe(LoginInfo info) {
 
 		// 设置用户信息为已删除
 		UserInf userInf = new UserInf();
@@ -74,6 +78,7 @@ public class AccountServiceImpl implements AccountService {
 
 	}
 
+	@Transactional(propagation = Propagation.MANDATORY)
 	@Override
 	public void update(LoginInfo info, AccountInf accountInf) {
 
@@ -87,9 +92,22 @@ public class AccountServiceImpl implements AccountService {
 		accountInfMapper.updateByPrimaryKeySelective(accountInf);
 	}
 
+	@Transactional(propagation = Propagation.MANDATORY)
 	@Override
-	public AccountInf query(AccountInf accountInf) {
-		return null;
-	}
+	public UserInf login(String username, String password) throws Exception {
+		// 查询帐号
+		password = Md5Utils.getMd5ByStr(password);
+		AccountInf accountInf = accountInfMapper.login(username, password);
+		if (null == accountInf || 1 == accountInf.getDeleted()) {
+			throw new Exception("帐号不存在或密码错误");
+		}
 
+		// 更新登录次数和时间
+		accountInf.setCount(accountInf.getCount() + 1);
+		accountInf.setLastTime(new Date());
+		accountInfMapper.updateByPrimaryKeySelective(accountInf);
+
+		// 返回用户信息
+		return userInfMapper.selectByPrimaryKey(accountInf.getUserId());
+	}
 }
