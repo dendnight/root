@@ -25,7 +25,7 @@ import com.dendnight.core.domain.UserInf;
 public interface UserService {
 
 	/**
-	 * 修改用户信息，删除的不能修改，不能修改成删除
+	 * 修改用户信息
 	 * 
 	 * @param info
 	 * @param userInf
@@ -33,7 +33,7 @@ public interface UserService {
 	void update(LoginInfo info, UserInf userInf);
 
 	/**
-	 * 查询用户信息，排除已删除的
+	 * 查询用户信息
 	 * 
 	 * @param info
 	 * @param id
@@ -45,8 +45,8 @@ public interface UserService {
 	 * 用户列表，排除已删除的
 	 * 
 	 * @param info
-	 * @param userInfCriteria
+	 * @param criteria
 	 * @return
 	 */
-	PaginatedList<UserInf> list(LoginInfo info, UserInfCriteria userInfCriteria);
+	PaginatedList<UserInf> list(LoginInfo info, UserInfCriteria criteria);
 }

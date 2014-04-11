@@ -47,7 +47,7 @@ public interface ImageService {
 	 * @param imageInfCriteria
 	 * @return
 	 */
-	PaginatedList<ImageInf> list(LoginInfo info, ImageInfCriteria imageInfCriteria);
+	PaginatedList<ImageInf> list(LoginInfo info, ImageInfCriteria criteria);
 
 	/**
 	 * 删除图片

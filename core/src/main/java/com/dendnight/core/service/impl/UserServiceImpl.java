@@ -53,9 +53,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public PaginatedList<UserInf> list(LoginInfo info, UserInfCriteria userInfCriteria) {
+	public PaginatedList<UserInf> list(LoginInfo info, UserInfCriteria criteria) {
 		PaginatedList<UserInf> result = new PaginatedList<UserInf>();
-
+		// TODO
 		return result;
 	}
 

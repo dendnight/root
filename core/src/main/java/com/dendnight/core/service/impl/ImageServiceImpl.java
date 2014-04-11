@@ -1,6 +1,8 @@
 package com.dendnight.core.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,21 +58,35 @@ public class ImageServiceImpl implements ImageService {
 
 	@Override
 	public void update(LoginInfo info, ImageInf imageInf) {
+		imageInf.setDeleted(null);
 		imageInf.setUpdatedBy(info.getId());
 		imageInf.setUpdatedTime(new Date());
 		imageInfMapper.updateByPrimaryKeySelective(imageInf);
 	}
 
 	@Override
-	public PaginatedList<ImageInf> list(LoginInfo info, ImageInfCriteria imageInfCriteria) {
-		// TODO Auto-generated method stub
-		return null;
+	public PaginatedList<ImageInf> list(LoginInfo info, ImageInfCriteria criteria) {
+		PaginatedList<ImageInf> result = new PaginatedList<ImageInf>();
+		List<ImageInf> list = new ArrayList<ImageInf>();
+
+		if (0 != criteria.getPagesize()) {
+			int total = imageInfMapper.count(criteria);
+			criteria.setTotal(total);
+			if (0 < total) {
+				list = imageInfMapper.list(criteria);
+			}
+		} else {
+			list = imageInfMapper.list(criteria);
+		}
+
+		result.setList(list);
+		result.setPagination(criteria);
+		return result;
 	}
 
 	@Override
 	public void delete(LoginInfo info, String id) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override

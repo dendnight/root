@@ -23,16 +23,32 @@ public class UserInfCriteria extends Pagination {
 
 	private static final long serialVersionUID = -1013507951510527102L;
 
+	private Integer deleted = 0;
+
 	@Override
 	public String getDefaultSort() {
-		// TODO Auto-generated method stub
-		return null;
+		return "user_inf_created_time";
 	}
 
 	@Override
 	public String[] getValidSortFields() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	/**
+	 * @return the {@link #deleted}
+	 */
+	public Integer getDeleted() {
+		return deleted;
+	}
+
+	/**
+	 * @param deleted
+	 *            the {@link #deleted} to set
+	 */
+	public void setDeleted(Integer deleted) {
+		this.deleted = deleted;
 	}
 
 }
