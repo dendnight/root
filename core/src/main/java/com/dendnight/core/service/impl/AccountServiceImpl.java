@@ -78,7 +78,6 @@ public class AccountServiceImpl implements AccountService {
 
 	}
 
-	@Transactional(propagation = Propagation.MANDATORY)
 	@Override
 	public void update(LoginInfo info, AccountInf accountInf) {
 

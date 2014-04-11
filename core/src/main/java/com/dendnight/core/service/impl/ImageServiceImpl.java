@@ -1,5 +1,7 @@
 package com.dendnight.core.service.impl;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,10 +10,8 @@ import com.dendnight.core.PaginatedList;
 import com.dendnight.core.criteria.ImageInfCriteria;
 import com.dendnight.core.domain.ImageAss;
 import com.dendnight.core.domain.ImageInf;
-import com.dendnight.core.domain.ImageLog;
 import com.dendnight.core.mapper.ImageAssMapper;
 import com.dendnight.core.mapper.ImageInfMapper;
-import com.dendnight.core.mapper.ImageLogMapper;
 import com.dendnight.core.service.ImageService;
 
 /**
@@ -40,9 +40,6 @@ public class ImageServiceImpl implements ImageService {
 	@Autowired
 	private ImageAssMapper imageAssMapper;
 
-	@Autowired
-	private ImageLogMapper imageLogMapper;
-
 	@Override
 	public void create(LoginInfo info, ImageInf imageInf) {
 
@@ -53,19 +50,15 @@ public class ImageServiceImpl implements ImageService {
 			imageAss.setUserId(info.getId());
 			imageAss.setCreatedBy(info.getId());
 			imageAssMapper.insertSelective(imageAss);
-		} else {// 临时用户写入日志
-			ImageLog imageLog = new ImageLog();
-			imageLog.setIp(info.getIp());
-			imageLog.setDetails(info.getHeader());
-			imageLogMapper.insertSelective(imageLog);
 		}
 		imageInfMapper.insertSelective(imageInf);
 	}
 
 	@Override
 	public void update(LoginInfo info, ImageInf imageInf) {
-		// TODO Auto-generated method stub
-
+		imageInf.setUpdatedBy(info.getId());
+		imageInf.setUpdatedTime(new Date());
+		imageInfMapper.updateByPrimaryKeySelective(imageInf);
 	}
 
 	@Override
