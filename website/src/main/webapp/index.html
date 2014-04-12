@@ -5,16 +5,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0 ,maximum-scale=1 ,minimum-scale=1">
 	<meta name="Keywords" content="Dendnight,等夜">
 	<meta name="description" content="专属于Dendnight的个人网站">
-    <title>welcome</title>
+    <title>dendnight</title>
 	<link rel="shortcut icon" href="images/favicon.ico">
-	<link rel="stylesheet" href="css/pure-min.css"> 
+	<link rel="stylesheet" href="css/pure.css"> 
+    <link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/grid.css">
 
     <!--[if lte IE 8]>
         <link rel="stylesheet" href="css/main-old-ie.css">
     <![endif]-->
-    <!--[if gt IE 8]><!-->
-        <link rel="stylesheet" href="css/main.css">
-    <!--<![endif]-->
 	<!--[if lt IE 9]>
 		<script src="js/html5shiv.js"></script>
 	<![endif]-->
@@ -27,7 +26,19 @@
         <ul>
             <li class="pure-menu-selected"><a href="http://dendnight.com">Home</a></li>
 			<li><a href="http://dendnight.com/rubik.html">Rubik</a></li>
+			<li><a href="#login" id="login">login</a></li>
         </ul>
+        <div id="login-dialog" class="login-form is-center" style="display: none;">
+        	<div class="l-box pure-u-1 pure-u-med-1-5">
+                <form class="pure-form pure-form-stacked">
+                    <fieldset>
+                        <input id="email" type="text" placeholder="Your Name">
+                        <input id="password" type="password" placeholder="Your Password" autocomplete="off">
+                        <button type="submit" class="pure-button pure-button-primary">Sign Up</button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -35,7 +46,7 @@
     <div class="splash">
         <h1 class="splash-head">Dendnight</h1>
         <p class="splash-subhead">
-            网站持续更新中...
+			网站持续更新中...
         </p>
     </div>
 </div>
@@ -49,7 +60,7 @@
         <div class="l-box-lrg is-center">
             <img class="pure-img-responsive" width="250" height="250" alt="http://dendnight.com" src="images/dendnight.png">
             <p class="content-head is-center">
-               移动端访问
+               	移动端访问
             </p>
         </div>
     </div>
@@ -68,5 +79,24 @@
   ga('send', 'pageview');
 
 </script> -->
+<script type="text/javascript" src="js/jquery-2.1.0.js" charset="UTF-8"></script>
+<script type="text/javascript">
+	$(function(){
+		var index_menu = $('.home-menu');
+		var login_dialog = $('#login-dialog');
+		
+		$('#login').toggler(function(){
+			login_dialog.slideDown("fast");
+			index_menu.css({'height':$(window).height(),'overflow-y':'scroll'});
+			$('body').css({'overflow':'hidden'}); 
+			
+		},function(){
+			login_dialog.hide();
+			index_menu.css({'height':'auto','overflow':'hidden'});
+			$('body').css({'overflow':'auto'}); 
+			
+		});
+	});
+</script>
 </body>
 </html>
