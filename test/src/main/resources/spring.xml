@@ -46,7 +46,7 @@
 
 	<aop:config>
 		<aop:pointcut id="exe"
-			expression="execution(public * com.dendnight.core.service.*.*(..))" /> <!--把事务控制在Service层 -->
+			expression="execution(* com.dendnight.core.*.*(..))" />
 		<aop:advisor pointcut-ref="exe" advice-ref="tm" />
 	</aop:config>
 

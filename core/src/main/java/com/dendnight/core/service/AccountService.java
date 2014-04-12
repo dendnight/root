@@ -28,8 +28,9 @@ public interface AccountService {
 	 * 
 	 * @param userInf
 	 * @param password
+	 * @throws Exception
 	 */
-	int register(UserInf userInf, String password);
+	int register(UserInf userInf, String password) throws Exception;
 
 	/**
 	 * 注销帐号

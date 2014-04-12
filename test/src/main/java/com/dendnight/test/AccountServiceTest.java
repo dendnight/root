@@ -24,10 +24,13 @@ public class AccountServiceTest extends AbstractJUnit4SpringContextTests {
 		// fail("Not yet implemented");
 
 		UserInf userInf = new UserInf();
-		userInf.setName("Dendnight");
-		userInf.setMobile("15618525920");
-		userInf.setUserType("UT_ADMIN");
-		accountService.register(userInf, "buzhidao!");
+		userInf.setName("Dendnight1");
+		try {
+			accountService.register(userInf, "buzhidao!");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -41,14 +41,15 @@ public class AccountServiceImpl implements AccountService {
 	private UserInfMapper userInfMapper;
 
 	@Override
-	public int register(UserInf userInf, String password) {
+	public int register(UserInf userInf, String password) throws Exception {
 
+		userInf.setUserType("V");
 		userInf.setCreatedBy(0);
 		userInfMapper.insertSelective(userInf);
 
 		AccountInf account = new AccountInf();
 		account.setUserId(userInf.getId());
-		account.setUsername(userInf.getMobile());
+		account.setUsername(userInf.getName());
 
 		account.setPassword(Md5Utils.getMd5ByStr(password));
 		account.setCreatedBy(0);

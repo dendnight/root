@@ -43,7 +43,7 @@ public class AccountAction extends BaseAction {
 	/** 密码 */
 	private String password;
 
-	private UserInf userInf;
+	private UserInf user;
 
 	/**
 	 * 登录
@@ -71,6 +71,16 @@ public class AccountAction extends BaseAction {
 			LOG.warn(e.getMessage(), e);
 			json.put(S, 0);
 			json.put(M, e.getMessage());
+		}
+		return JSON;
+	}
+
+	public String register() {
+		try {
+			accountService.register(user, password);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return JSON;
 	}
@@ -106,18 +116,18 @@ public class AccountAction extends BaseAction {
 	}
 
 	/**
-	 * @return the {@link #userInf}
+	 * @return the {@link #user}
 	 */
-	public UserInf getUserInf() {
-		return userInf;
+	public UserInf getUser() {
+		return user;
 	}
 
 	/**
-	 * @param userInf
-	 *            the {@link #userInf} to set
+	 * @param user
+	 *            the {@link #user} to set
 	 */
-	public void setUserInf(UserInf userInf) {
-		this.userInf = userInf;
+	public void setUser(UserInf user) {
+		this.user = user;
 	}
 
 }
