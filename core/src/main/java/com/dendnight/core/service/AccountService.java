@@ -1,6 +1,6 @@
 package com.dendnight.core.service;
 
-import com.dendnight.core.LoginInfo;
+import com.dendnight.common.LoginInfo;
 import com.dendnight.core.domain.AccountInf;
 import com.dendnight.core.domain.UserInf;
 

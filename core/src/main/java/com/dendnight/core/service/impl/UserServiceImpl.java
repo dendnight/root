@@ -5,8 +5,8 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.dendnight.core.LoginInfo;
-import com.dendnight.core.PaginatedList;
+import com.dendnight.common.LoginInfo;
+import com.dendnight.common.PaginatedList;
 import com.dendnight.core.criteria.UserInfCriteria;
 import com.dendnight.core.domain.UserInf;
 import com.dendnight.core.mapper.UserInfMapper;

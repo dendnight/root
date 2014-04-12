@@ -1,4 +1,4 @@
-package com.dendnight.core;
+package com.dendnight.common;
 
 import java.io.Serializable;
 

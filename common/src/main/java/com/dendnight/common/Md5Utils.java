@@ -1,4 +1,4 @@
-package com.dendnight.core;
+package com.dendnight.common;
 
 import java.io.File;
 import java.io.FileInputStream;

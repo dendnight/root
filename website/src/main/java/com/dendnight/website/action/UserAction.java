@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import com.dendnight.core.BaseAction;
+import com.dendnight.common.BaseAction;
 import com.dendnight.core.service.UserService;
 
 /**

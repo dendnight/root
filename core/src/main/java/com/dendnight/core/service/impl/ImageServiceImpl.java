@@ -7,8 +7,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.dendnight.core.LoginInfo;
-import com.dendnight.core.PaginatedList;
+import com.dendnight.common.LoginInfo;
+import com.dendnight.common.PaginatedList;
 import com.dendnight.core.criteria.ImageInfCriteria;
 import com.dendnight.core.domain.ImageAss;
 import com.dendnight.core.domain.ImageInf;

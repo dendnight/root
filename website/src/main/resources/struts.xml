@@ -20,7 +20,7 @@
 
 		<interceptors>
 			<interceptor name="authority"
-				class="com.dendnight.core.AuthorityInterceptor" />
+				class="com.dendnight.common.AuthorityInterceptor" />
 			<interceptor-stack name="baseInterceptorStack">
 				<interceptor-ref name="defaultStack" />
 				<interceptor-ref name="authority" />

@@ -6,8 +6,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.dendnight.core.LoginInfo;
-import com.dendnight.core.Md5Utils;
+import com.dendnight.common.LoginInfo;
+import com.dendnight.common.Md5Utils;
 import com.dendnight.core.domain.AccountInf;
 import com.dendnight.core.domain.UserInf;
 import com.dendnight.core.mapper.AccountInfMapper;
