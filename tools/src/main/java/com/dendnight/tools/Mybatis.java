@@ -37,7 +37,6 @@ public class Mybatis {
 
 		List<String> warnings = new ArrayList<String>();
 		boolean overwrite = true;
-		// String mg = "/mybatis-core-generator.xml";
 
 		String mg = "/mybatis-core-generator.xml";
 
@@ -49,10 +48,8 @@ public class Mybatis {
 			config = cp.parseConfiguration(configFile);
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.out.println(e.getMessage());
 		} catch (XMLParserException e) {
 			e.printStackTrace();
-			System.out.println(e.getMessage());
 		}
 
 		DefaultShellCallback callback = new DefaultShellCallback(overwrite);
@@ -62,20 +59,16 @@ public class Mybatis {
 			myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
 		} catch (InvalidConfigurationException e) {
 			e.printStackTrace();
-			System.out.println(e.getMessage());
 		}
 
 		try {
 			myBatisGenerator.generate(null);
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println(e.getMessage());
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.out.println(e.getMessage());
 		} catch (InterruptedException e) {
 			e.printStackTrace();
-			System.out.println(e.getMessage());
 		}
 		System.out.println("OK");
 	}

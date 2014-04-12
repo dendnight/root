@@ -37,6 +37,18 @@
     delete from user_inf
     where id = #{id,jdbcType=INTEGER}
   </delete>
+  <insert id="insert" parameterType="com.dendnight.core.domain.UserInf" useGeneratedKeys="true" keyProperty="id" >
+    insert into user_inf (name, email, mobile, 
+      age, gender, user_type, 
+      birthday, readme, created_time, 
+      created_by, updated_time, updated_by, 
+      deleted, version)
+    values (#{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{age,jdbcType=INTEGER}, #{gender,jdbcType=INTEGER}, #{userType,jdbcType=VARCHAR}, 
+      #{birthday,jdbcType=TIMESTAMP}, #{readme,jdbcType=VARCHAR}, #{createdTime,jdbcType=TIMESTAMP}, 
+      #{createdBy,jdbcType=INTEGER}, #{updatedTime,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=INTEGER}, 
+      #{deleted,jdbcType=TINYINT}, #{version,jdbcType=INTEGER})
+  </insert>
   <insert id="insertSelective" parameterType="com.dendnight.core.domain.UserInf" useGeneratedKeys="true" keyProperty="id" >
     insert into user_inf
     <trim prefix="(" suffix=")" suffixOverrides="," >

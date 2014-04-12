@@ -41,22 +41,6 @@
     delete from image_inf
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.dendnight.core.domain.ImageInf" >
-    insert into image_inf (id, height, width, 
-      path, longitude, latitude, 
-      readme, camera_model, camera_brand, 
-      lens_brand, date_taken, lens_model, 
-      program_name, created_time, updated_time, 
-      updated_by, deleted, version
-      )
-    values (#{id,jdbcType=VARCHAR}, #{height,jdbcType=INTEGER}, #{width,jdbcType=INTEGER}, 
-      #{path,jdbcType=VARCHAR}, #{longitude,jdbcType=DOUBLE}, #{latitude,jdbcType=DOUBLE}, 
-      #{readme,jdbcType=VARCHAR}, #{cameraModel,jdbcType=VARCHAR}, #{cameraBrand,jdbcType=VARCHAR}, 
-      #{lensBrand,jdbcType=VARCHAR}, #{dateTaken,jdbcType=TIMESTAMP}, #{lensModel,jdbcType=VARCHAR}, 
-      #{programName,jdbcType=VARCHAR}, #{createdTime,jdbcType=TIMESTAMP}, #{updatedTime,jdbcType=TIMESTAMP}, 
-      #{updatedBy,jdbcType=INTEGER}, #{deleted,jdbcType=TINYINT}, #{version,jdbcType=INTEGER}
-      )
-  </insert>
   <insert id="insertSelective" parameterType="com.dendnight.core.domain.ImageInf" >
     insert into image_inf
     <trim prefix="(" suffix=")" suffixOverrides="," >

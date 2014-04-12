@@ -52,7 +52,6 @@
 			domainObjectName="AccessLog" enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
-			<!-- 返回主键值 -->
 			<generatedKey column="id" sqlStatement="JDBC" identity="true" />
 		</table>
 
@@ -71,15 +70,6 @@
 			<generatedKey column="id" sqlStatement="JDBC" identity="true" />
 		</table>
 
-		<!-- 图片上传日志 -->
-		<table schema="mybatis" alias="image_log" tableName="image_log"
-			domainObjectName="ImageLog" enableCountByExample="false"
-			enableUpdateByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" selectByExampleQueryId="false">
-			<!-- 返回主键值 -->
-			<generatedKey column="id" sqlStatement="JDBC" identity="true" />
-		</table>
-		
 		<!-- 图片信息 -->
 		<table schema="mybatis" alias="image_inf" tableName="image_inf"
 			domainObjectName="ImageInf" enableCountByExample="false"
@@ -92,7 +82,6 @@
 			domainObjectName="ParamSys" enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
-			<!-- 返回主键值 -->
 			<generatedKey column="id" sqlStatement="JDBC" identity="true" />
 		</table>
 
@@ -101,7 +90,6 @@
 			domainObjectName="UserInf" enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
-			<!-- 返回主键值 -->
 			<generatedKey column="id" sqlStatement="JDBC" identity="true" />
 		</table>
 		

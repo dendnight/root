@@ -41,6 +41,22 @@
     delete from image_inf
     where id = #{id,jdbcType=VARCHAR}
   </delete>
+  <insert id="insert" parameterType="com.dendnight.core.domain.ImageInf" >
+    insert into image_inf (id, height, width, 
+      path, longitude, latitude, 
+      readme, camera_model, camera_brand, 
+      lens_brand, date_taken, lens_model, 
+      program_name, created_time, updated_time, 
+      updated_by, deleted, version
+      )
+    values (#{id,jdbcType=VARCHAR}, #{height,jdbcType=INTEGER}, #{width,jdbcType=INTEGER}, 
+      #{path,jdbcType=VARCHAR}, #{longitude,jdbcType=DOUBLE}, #{latitude,jdbcType=DOUBLE}, 
+      #{readme,jdbcType=VARCHAR}, #{cameraModel,jdbcType=VARCHAR}, #{cameraBrand,jdbcType=VARCHAR}, 
+      #{lensBrand,jdbcType=VARCHAR}, #{dateTaken,jdbcType=TIMESTAMP}, #{lensModel,jdbcType=VARCHAR}, 
+      #{programName,jdbcType=VARCHAR}, #{createdTime,jdbcType=TIMESTAMP}, #{updatedTime,jdbcType=TIMESTAMP}, 
+      #{updatedBy,jdbcType=INTEGER}, #{deleted,jdbcType=TINYINT}, #{version,jdbcType=INTEGER}
+      )
+  </insert>
   <insert id="insertSelective" parameterType="com.dendnight.core.domain.ImageInf" >
     insert into image_inf
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -234,35 +250,4 @@
       version = #{version,jdbcType=INTEGER}
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  
-  <select id="count" parameterType="com.dendnight.core.criteria.ImageInfCriteria" resultType="java.lang.Integer">
-    select count(image_inf.id) from image_inf image_inf left join image_ass as image_ass on image_ass.image_id = image_inf.id 
-    <if test="null != parameter">
-        <include refid="list_where"/>
-    </if>
-  </select>
-  
-  <sql id="list_where">
-      <trim prefix="where" prefixOverrides="and">
-          <if test="null != deleted">
-              image_inf.deleted = #{deleted}
-          </if>
-          <if test="null != userId">
-              image_ass.user_id = #{userId}
-          </if>
-      </trim>
-  </sql>
-  
-  <select id="list" parameterType="com.dendnight.core.criteria.ImageInfCriteria" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from image_inf image_inf left join image_ass as image_ass on image_ass.image_id = image_inf.id 
-    <if test="null != parameter">
-        <include refid="list_where"/>
-    </if>
-    ORDER BY ${sort} ${order}
-	<if test="pagesize != 0">
-		LIMIT #{offset}, #{pagesize}
-	</if>
-  </select>
 </mapper>

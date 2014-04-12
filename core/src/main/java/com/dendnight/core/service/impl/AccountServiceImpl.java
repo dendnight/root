@@ -46,13 +46,13 @@ public class AccountServiceImpl implements AccountService {
 		userInf.setCreatedBy(0);
 		userInfMapper.insertSelective(userInf);
 
-		AccountInf account = new AccountInf();
-		account.setUserId(userInf.getId());
-		account.setUsername(userInf.getMobile());
-
-		account.setPassword(Md5Utils.getMd5ByStr(password));
-		account.setCreatedBy(0);
-		accountInfMapper.insertSelective(account);
+		// AccountInf account = new AccountInf();
+		// account.setUserId(userInf.getId());
+		// account.setUsername(userInf.getMobile());
+		//
+		// account.setPassword(Md5Utils.getMd5ByStr(password));
+		// account.setCreatedBy(0);
+		// accountInfMapper.insertSelective(account);
 		return userInf.getId();
 	}
 
