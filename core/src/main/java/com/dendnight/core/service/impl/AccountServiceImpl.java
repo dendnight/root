@@ -5,8 +5,6 @@ import java.util.Date;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.dendnight.core.LoginInfo;
 import com.dendnight.core.Md5Utils;
@@ -42,22 +40,22 @@ public class AccountServiceImpl implements AccountService {
 	@Autowired
 	private UserInfMapper userInfMapper;
 
-	@Transactional(propagation = Propagation.MANDATORY)
 	@Override
 	public int register(UserInf userInf, String password) {
 
+		userInf.setCreatedBy(0);
 		userInfMapper.insertSelective(userInf);
 
-		AccountInf record = new AccountInf();
-		record.setUserId(userInf.getId());
-		record.setUsername(userInf.getMobile());
+		AccountInf account = new AccountInf();
+		account.setUserId(userInf.getId());
+		account.setUsername(userInf.getMobile());
 
-		record.setPassword(Md5Utils.getMd5ByStr(password));
-		accountInfMapper.insertSelective(record);
+		account.setPassword(Md5Utils.getMd5ByStr(password));
+		account.setCreatedBy(0);
+		accountInfMapper.insertSelective(account);
 		return userInf.getId();
 	}
 
-	@Transactional(propagation = Propagation.MANDATORY)
 	@Override
 	public void unsubscribe(LoginInfo info) {
 
@@ -91,7 +89,6 @@ public class AccountServiceImpl implements AccountService {
 		accountInfMapper.updateByPrimaryKeySelective(accountInf);
 	}
 
-	@Transactional(propagation = Propagation.MANDATORY)
 	@Override
 	public UserInf login(String username, String password) throws Exception {
 		// 查询帐号

@@ -72,32 +72,6 @@ public class UserAction extends BaseAction {
 			return JSON;
 		}
 
-		// UserCriteria criteria = new UserCriteria();
-		// criteria.setUsername(username);
-		// PaginatedList<User> list = userService.list(criteria, null);
-		//
-		// if (null == list || null == list.getResult() || 1 >
-		// list.getResult().size()) {
-		// json.put(M, "帐号不存在");
-		// json.put(S, 0);
-		// return JSON;
-		// }
-
-		// try {
-		// if
-		// (!Md5Utils.getMd5ByStr(password).equals(list.getResult().get(0).getPassword()))
-		// {
-		// json.put(M, "密码输入有误");
-		// json.put(S, 0);
-		// return JSON;
-		// }
-		// } catch (Exception e) {
-		// log.warn(e);
-		// json.put(M, "密码输入有误");
-		// json.put(S, 0);
-		// return JSON;
-		// }
-
 		// LoginInfo info = new LoginInfo();
 		// info.setId(list.getResult().get(0).getId());
 		// info.setNickname(list.getResult().get(0).getNickname());

@@ -2,12 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
 	<groupId>com.dendnight</groupId>
 	<artifactId>root</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-
 	<name>root</name>
 	<url>http://maven.apache.org</url>
 
@@ -15,10 +13,12 @@
 		<module>core</module>
 		<module>website</module>
 		<module>webmaster</module>
+		<module>test</module>
+		<module>tools</module>
 	</modules>
 
 	<properties>
-		<!--指定Maven用什么编码来读取源码及文档 -->
+		<!--指定Maven用什么编码来读取源码及文�? -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!--指定Maven用什么编码来呈现站点的HTML文件 -->
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
