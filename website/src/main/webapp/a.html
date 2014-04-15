@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+  <script type="text/javascript">
+  	$(function(){
+  		 $.ajax({
+  			type:'get',
+  			url:'http://gallery.dendnight.com/gallery/list.htm',
+  			dataType:'jsonp',
+  			crossDomain: true,
+  			async:false,
+  			jsonp: "jsonpCallback",
+  			contentType: "application/json; charset=utf-8",
+  			success:function(data){
+  				console.log(data.s);
+  				var data = data.o;
+  				//$.each(data,function(i,c){
+  					//$('body').append('<img src="'+c.image+'" />');
+  				//});
+  			}
+  		});
+  		
+  		//$.getJSON("http://gallery.dendnight.com/gallery/list.htm?callback=?", function (result) {console.log(result.t);});
+  	});
+  </script>
+ </head>
+ <body>
+  <div style="width:100px;height:100px;border:1px solid green;float:left;">1</div>
+  <div style="width:100px;height:100px;border:1px solid blue;float:right;">3</div>
+  <div style="width:100px;height:100px;border:1px solid #f00;margin:0 auto;">2</div>
+ </body>
+</html>

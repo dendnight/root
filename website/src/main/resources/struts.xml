@@ -46,5 +46,8 @@
 		    <interceptor-ref name="defaultStack"></interceptor-ref>
 		</action>
 	    
+	    <action name="upload" class="UploadImagesAction" >
+	        <interceptor-ref name="defaultStack"></interceptor-ref>
+	    </action>
 	</package>
 </struts>
