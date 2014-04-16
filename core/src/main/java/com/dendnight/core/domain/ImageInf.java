@@ -17,6 +17,8 @@ public class ImageInf {
 
     private String readme;
 
+    private Integer count;
+
     private String cameraModel;
 
     private String cameraBrand;
@@ -93,6 +95,14 @@ public class ImageInf {
 
     public void setReadme(String readme) {
         this.readme = readme == null ? null : readme.trim();
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
     }
 
     public String getCameraModel() {

@@ -9,6 +9,7 @@
     <result column="image_inf_longitude" property="longitude" jdbcType="DOUBLE" />
     <result column="image_inf_latitude" property="latitude" jdbcType="DOUBLE" />
     <result column="image_inf_readme" property="readme" jdbcType="VARCHAR" />
+    <result column="image_inf_count" property="count" jdbcType="INTEGER" />
     <result column="image_inf_camera_model" property="cameraModel" jdbcType="VARCHAR" />
     <result column="image_inf_camera_brand" property="cameraBrand" jdbcType="VARCHAR" />
     <result column="image_inf_lens_brand" property="lensBrand" jdbcType="VARCHAR" />
@@ -24,7 +25,7 @@
   <sql id="Base_Column_List" >
     image_inf.id as image_inf_id, image_inf.height as image_inf_height, image_inf.width as image_inf_width, 
     image_inf.path as image_inf_path, image_inf.longitude as image_inf_longitude, image_inf.latitude as image_inf_latitude, 
-    image_inf.readme as image_inf_readme, image_inf.camera_model as image_inf_camera_model, 
+    image_inf.readme as image_inf_readme, image_inf.count as image_inf_count, image_inf.camera_model as image_inf_camera_model, 
     image_inf.camera_brand as image_inf_camera_brand, image_inf.lens_brand as image_inf_lens_brand, 
     image_inf.date_taken as image_inf_date_taken, image_inf.lens_model as image_inf_lens_model, 
     image_inf.program_name as image_inf_program_name, image_inf.created_time as image_inf_created_time, 
@@ -64,6 +65,9 @@
       </if>
       <if test="readme != null" >
         readme,
+      </if>
+      <if test="count != null" >
+        count,
       </if>
       <if test="cameraModel != null" >
         camera_model,
@@ -121,6 +125,9 @@
       <if test="readme != null" >
         #{readme,jdbcType=VARCHAR},
       </if>
+      <if test="count != null" >
+        #{count,jdbcType=INTEGER},
+      </if>
       <if test="cameraModel != null" >
         #{cameraModel,jdbcType=VARCHAR},
       </if>
@@ -177,6 +184,9 @@
       <if test="readme != null" >
         readme = #{readme,jdbcType=VARCHAR},
       </if>
+      <if test="count != null" >
+        count = #{count,jdbcType=INTEGER},
+      </if>
       <if test="cameraModel != null" >
         camera_model = #{cameraModel,jdbcType=VARCHAR},
       </if>
@@ -221,6 +231,7 @@
       longitude = #{longitude,jdbcType=DOUBLE},
       latitude = #{latitude,jdbcType=DOUBLE},
       readme = #{readme,jdbcType=VARCHAR},
+      count = #{count,jdbcType=INTEGER},
       camera_model = #{cameraModel,jdbcType=VARCHAR},
       camera_brand = #{cameraBrand,jdbcType=VARCHAR},
       lens_brand = #{lensBrand,jdbcType=VARCHAR},

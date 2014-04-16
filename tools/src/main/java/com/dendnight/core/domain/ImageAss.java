@@ -9,6 +9,8 @@ public class ImageAss {
 
     private String imageId;
 
+    private String oldName;
+
     private Date createdTime;
 
     private Integer createdBy;
@@ -43,6 +45,14 @@ public class ImageAss {
 
     public void setImageId(String imageId) {
         this.imageId = imageId == null ? null : imageId.trim();
+    }
+
+    public String getOldName() {
+        return oldName;
+    }
+
+    public void setOldName(String oldName) {
+        this.oldName = oldName == null ? null : oldName.trim();
     }
 
     public Date getCreatedTime() {

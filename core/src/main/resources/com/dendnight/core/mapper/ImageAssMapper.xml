@@ -5,6 +5,7 @@
     <id column="image_ass_id" property="id" jdbcType="INTEGER" />
     <result column="image_ass_user_id" property="userId" jdbcType="INTEGER" />
     <result column="image_ass_image_id" property="imageId" jdbcType="VARCHAR" />
+    <result column="image_ass_old_name" property="oldName" jdbcType="VARCHAR" />
     <result column="image_ass_created_time" property="createdTime" jdbcType="TIMESTAMP" />
     <result column="image_ass_created_by" property="createdBy" jdbcType="INTEGER" />
     <result column="image_ass_updated_time" property="updatedTime" jdbcType="TIMESTAMP" />
@@ -14,9 +15,10 @@
   </resultMap>
   <sql id="Base_Column_List" >
     image_ass.id as image_ass_id, image_ass.user_id as image_ass_user_id, image_ass.image_id as image_ass_image_id, 
-    image_ass.created_time as image_ass_created_time, image_ass.created_by as image_ass_created_by, 
-    image_ass.updated_time as image_ass_updated_time, image_ass.updated_by as image_ass_updated_by, 
-    image_ass.deleted as image_ass_deleted, image_ass.versoin as image_ass_versoin
+    image_ass.old_name as image_ass_old_name, image_ass.created_time as image_ass_created_time, 
+    image_ass.created_by as image_ass_created_by, image_ass.updated_time as image_ass_updated_time, 
+    image_ass.updated_by as image_ass_updated_by, image_ass.deleted as image_ass_deleted, 
+    image_ass.versoin as image_ass_versoin
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -28,14 +30,6 @@
     delete from image_ass
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.dendnight.core.domain.ImageAss" useGeneratedKeys="true" keyProperty="id" >
-    insert into image_ass (user_id, image_id, created_time, 
-      created_by, updated_time, updated_by, 
-      deleted, versoin)
-    values (#{userId,jdbcType=INTEGER}, #{imageId,jdbcType=VARCHAR}, #{createdTime,jdbcType=TIMESTAMP}, 
-      #{createdBy,jdbcType=INTEGER}, #{updatedTime,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=INTEGER}, 
-      #{deleted,jdbcType=INTEGER}, #{versoin,jdbcType=INTEGER})
-  </insert>
   <insert id="insertSelective" parameterType="com.dendnight.core.domain.ImageAss" useGeneratedKeys="true" keyProperty="id" >
     insert into image_ass
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -44,6 +38,9 @@
       </if>
       <if test="imageId != null" >
         image_id,
+      </if>
+      <if test="oldName != null" >
+        old_name,
       </if>
       <if test="createdTime != null" >
         created_time,
@@ -70,6 +67,9 @@
       </if>
       <if test="imageId != null" >
         #{imageId,jdbcType=VARCHAR},
+      </if>
+      <if test="oldName != null" >
+        #{oldName,jdbcType=VARCHAR},
       </if>
       <if test="createdTime != null" >
         #{createdTime,jdbcType=TIMESTAMP},
@@ -100,6 +100,9 @@
       <if test="imageId != null" >
         image_id = #{imageId,jdbcType=VARCHAR},
       </if>
+      <if test="oldName != null" >
+        old_name = #{oldName,jdbcType=VARCHAR},
+      </if>
       <if test="createdTime != null" >
         created_time = #{createdTime,jdbcType=TIMESTAMP},
       </if>
@@ -125,6 +128,7 @@
     update image_ass
     set user_id = #{userId,jdbcType=INTEGER},
       image_id = #{imageId,jdbcType=VARCHAR},
+      old_name = #{oldName,jdbcType=VARCHAR},
       created_time = #{createdTime,jdbcType=TIMESTAMP},
       created_by = #{createdBy,jdbcType=INTEGER},
       updated_time = #{updatedTime,jdbcType=TIMESTAMP},

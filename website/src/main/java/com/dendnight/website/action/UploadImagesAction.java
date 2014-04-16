@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.dendnight.common.BaseAction;
-import com.dendnight.common.Md5Utils;
+import com.dendnight.common.MD5;
 import com.dendnight.core.domain.ImageInf;
 import com.dendnight.core.service.ImageService;
 
@@ -59,32 +59,50 @@ public class UploadImagesAction extends BaseAction {
 			return JSON;
 		}
 
-		ImageInf imageInf;
 		for (int i = 0; i < images.length; i++) {
 
 			int width = 0;// FIXME 图片属性
 			int height = 0;
-			String path = "";
 			String md5 = "";
+			String path = "";
+			ImageInf imageInf = null;
 			try {
 
-				md5 = Md5Utils.getMd5ByFile(images[i]);
-				// 图片路径 FIXME
-				// ServletActionContext.getServletContext().getRealPath("/images");
-				String dateTime = new SimpleDateFormat("yyyy/MM/dd/").format(new Date());
-				String uuid = UUID.randomUUID().toString();
+				md5 = MD5.getFileMD5String(images[i]);
+				imageInf = imageService.query(info(), md5);
+				if (null == imageInf) {// 不存在则创建copy
 
-				path = "pictures/" + dateTime + uuid + imagesFileName[i].substring(imagesFileName[i].lastIndexOf('.'));
-				// 创建一个新 File 实例
-				File imageFile = new File("D:/temp/" + path);
-				// 判断路径是否存在
-				if (!imageFile.getParentFile().exists()) {
-					// 如果不存在，则递归创建此路径
-					imageFile.getParentFile().mkdirs();
+					// 图片路径 FIXME
+					String dateTime = new SimpleDateFormat("yyyy/MM/dd/").format(new Date());
+					String uuid = UUID.randomUUID().toString();
+
+					path = "pictures/" + dateTime + uuid
+							+ imagesFileName[i].substring(imagesFileName[i].lastIndexOf('.'));
+					// 创建一个新 File 实例
+					File imageFile = new File("D:/temp/" + path);
+					// 判断路径是否存在
+					if (!imageFile.getParentFile().exists()) {
+						// 如果不存在，则递归创建此路径
+						imageFile.getParentFile().mkdirs();
+					}
+
+					// 将原文件保存到硬盘上,Struts2会帮我们自动删除临时文件
+					FileUtils.copyFile(images[i], imageFile);
+
+					imageInf = new ImageInf();
+					imageInf.setHeight(height);
+					imageInf.setWidth(width);
+					imageInf.setId(md5);
+					imageInf.setPath(path);
+					imageInf.setReadme(imagesFileName[i]);// 默认
+					imageService.create(info(), imageInf);
+				} else {
+
+					imageInf.setReadme(imagesFileName[i]);
+					imageInf.setCount(imageInf.getCount() + 1);
+					imageService.update(info(), imageInf);
 				}
 
-				// 将原文件保存到硬盘上,Struts2会帮我们自动删除临时文件
-				FileUtils.copyFile(images[i], imageFile);
 			} catch (IOException e) {
 				log.warn(e);
 				json.put(S, 0);
@@ -92,12 +110,6 @@ public class UploadImagesAction extends BaseAction {
 				return JSON;
 			}
 
-			imageInf = new ImageInf();
-			imageInf.setHeight(height);
-			imageInf.setWidth(width);
-			imageInf.setId(md5);
-			imageInf.setPath(path);
-			imageService.create(info(), imageInf);
 		}
 		json.put(S, 1);
 		json.put(M, "上传成功");

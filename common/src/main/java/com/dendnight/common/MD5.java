@@ -66,11 +66,11 @@ public class MD5 {
 		return bufferToHex(messagedigest.digest());
 	}
 
-	public static String getMD5String(String s) {
+	private static String getMD5String(String s) {
 		return getMD5String(s.getBytes());
 	}
 
-	public static String getMD5String(byte[] bytes) {
+	private static String getMD5String(byte[] bytes) {
 		messagedigest.update(bytes);
 		return bufferToHex(messagedigest.digest());
 	}

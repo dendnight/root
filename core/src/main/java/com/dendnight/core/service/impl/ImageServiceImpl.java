@@ -51,7 +51,10 @@ public class ImageServiceImpl implements ImageService {
 			imageAss.setImageId(imageInf.getId());
 			imageAss.setUserId(info.getId());
 			imageAss.setCreatedBy(info.getId());
+			imageAss.setOldName(imageInf.getReadme());
 			imageAssMapper.insertSelective(imageAss);
+
+			imageInf.setReadme(null);
 		}
 		imageInfMapper.insertSelective(imageInf);
 	}
@@ -59,7 +62,7 @@ public class ImageServiceImpl implements ImageService {
 	@Override
 	public void update(LoginInfo info, ImageInf imageInf) {
 		imageInf.setDeleted(null);
-		imageInf.setUpdatedBy(info.getId());
+		imageInf.setUpdatedBy(info.getId() == null ? 0 : info.getId());
 		imageInf.setUpdatedTime(new Date());
 		imageInfMapper.updateByPrimaryKeySelective(imageInf);
 	}
@@ -91,8 +94,7 @@ public class ImageServiceImpl implements ImageService {
 
 	@Override
 	public ImageInf query(LoginInfo info, String id) {
-		// TODO Auto-generated method stub
-		return null;
+		return imageInfMapper.selectByPrimaryKey(id);
 	}
 
 }
