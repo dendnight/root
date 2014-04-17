@@ -38,8 +38,10 @@
 				</ul>
 			</div>
 		</div>
-		<s:iterator value="result.list">
+		<s:iterator value="result.list" >
+			<div class="photo-box pure-u-1 pure-u-med-1-3 pure-u-lrg-1-4">
 			<img alt="" src="<s:property value="path"/>" />
+			</div>
 		</s:iterator>
 		<div class="pure-g">
 			<div class="photo-box pure-u-1 pure-u-med-1-3 pure-u-lrg-1-4">
