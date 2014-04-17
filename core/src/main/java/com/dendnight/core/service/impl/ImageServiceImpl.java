@@ -62,7 +62,7 @@ public class ImageServiceImpl implements ImageService {
 	@Override
 	public void update(LoginInfo info, ImageInf imageInf) {
 		imageInf.setDeleted(null);
-		imageInf.setUpdatedBy(info.getId() == null ? 0 : info.getId());
+		imageInf.setUpdatedBy(0);
 		imageInf.setUpdatedTime(new Date());
 		imageInfMapper.updateByPrimaryKeySelective(imageInf);
 	}

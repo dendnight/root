@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.dendnight.common.BaseAction;
-import com.dendnight.common.MD5;
+import com.dendnight.common.DigestUtil;
 import com.dendnight.core.domain.ImageInf;
 import com.dendnight.core.service.ImageService;
 
@@ -68,7 +68,7 @@ public class UploadImagesAction extends BaseAction {
 			ImageInf imageInf = null;
 			try {
 
-				md5 = MD5.getFileMD5String(images[i]);
+				md5 = DigestUtil.md5sum(images[i]);
 				imageInf = imageService.query(info(), md5);
 				if (null == imageInf) {// 不存在则创建copy
 

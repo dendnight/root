@@ -1,11 +1,18 @@
 package com.dendnight.website.action;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.dendnight.common.BaseAction;
+import com.dendnight.common.PaginatedList;
 import com.dendnight.core.criteria.ImageInfCriteria;
+import com.dendnight.core.domain.ImageInf;
 import com.dendnight.core.service.ImageService;
 
 /**
@@ -37,12 +44,36 @@ public class GalleryAction extends BaseAction {
 	/** 页码 */
 	private Integer page = 1;
 
-	private ImageInfCriteria criteria;
+	private PaginatedList<ImageInf> result;
 
 	public String list() {
-		imageService.list(info(), criteria);
+		json = new HashMap<String, Object>();
+		if (timeout) {
+			json.put(T, 1);
+			return JSON;
+		}
 
+		List<Map<String, Object>> thumbnail = new ArrayList<Map<String, Object>>();
+
+		ImageInfCriteria criteria = new ImageInfCriteria();
+		criteria.setPage(page);
+		result = imageService.list(info(), criteria);
+		if (null != result && null != result.getList() && 0 < result.getList().size()) {
+			Map<String, Object> map = null;
+			for (ImageInf image : result.getList()) {
+				map = new HashMap<String, Object>();
+				map.put("path", image.getPath());
+				thumbnail.add(map);
+			}
+		}
+		json.put(O, thumbnail);
 		return JSON;
+	}
+
+	public String execute() {
+		ImageInfCriteria criteria = new ImageInfCriteria();
+		result = imageService.list(info(), criteria);
+		return SUCCESS;
 	}
 
 	/**
@@ -61,18 +92,18 @@ public class GalleryAction extends BaseAction {
 	}
 
 	/**
-	 * @return the {@link #criteria}
+	 * @return the {@link #result}
 	 */
-	public ImageInfCriteria getCriteria() {
-		return criteria;
+	public PaginatedList<ImageInf> getResult() {
+		return result;
 	}
 
 	/**
-	 * @param criteria
-	 *            the {@link #criteria} to set
+	 * @param result
+	 *            the {@link #result} to set
 	 */
-	public void setCriteria(ImageInfCriteria criteria) {
-		this.criteria = criteria;
+	public void setResult(PaginatedList<ImageInf> result) {
+		this.result = result;
 	}
 
 }

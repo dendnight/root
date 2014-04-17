@@ -31,7 +31,7 @@ public class ImageInfCriteria extends Pagination {
 
 	@Override
 	public String getDefaultSort() {
-		return "image_ass_created_time";
+		return "image_inf_created_time";
 	}
 
 	@Override

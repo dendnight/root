@@ -248,7 +248,7 @@
   
   <select id="count" parameterType="com.dendnight.core.criteria.ImageInfCriteria" resultType="java.lang.Integer">
     select count(image_inf.id) from image_inf image_inf left join image_ass as image_ass on image_ass.image_id = image_inf.id 
-    <if test="null != parameter">
+    <if test="null != _parameter">
         <include refid="list_where"/>
     </if>
   </select>
@@ -268,7 +268,7 @@
     select 
     <include refid="Base_Column_List" />
     from image_inf image_inf left join image_ass as image_ass on image_ass.image_id = image_inf.id 
-    <if test="null != parameter">
+    <if test="null != _parameter">
         <include refid="list_where"/>
     </if>
     ORDER BY ${sort} ${order}

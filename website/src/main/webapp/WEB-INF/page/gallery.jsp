@@ -38,7 +38,9 @@
 				</ul>
 			</div>
 		</div>
-
+		<s:iterator value="result.list">
+			<img alt="" src="<s:property value="path"/>" />
+		</s:iterator>
 		<div class="pure-g">
 			<div class="photo-box pure-u-1 pure-u-med-1-3 pure-u-lrg-1-4">
 				<a href="http://www.dillonmcintosh.tumblr.com/"> <img
