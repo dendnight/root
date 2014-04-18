@@ -1,39 +1,159 @@
 <!doctype html>
 <html lang="en">
- <head>
-  <meta charset="UTF-8">
-  <meta name="Generator" content="EditPlus®">
-  <meta name="Author" content="">
-  <meta name="Keywords" content="">
-  <meta name="Description" content="">
-  <title>Document</title>
-  <script type="text/javascript" src="js/jquery-2.1.0.js"></script>
-  <script type="text/javascript">
-  	$(function(){
-  		 $.ajax({
-  			type:'get',
-  			url:'http://gallery.dendnight.com/gallery/list.htm',
-  			dataType:'jsonp',
-  			crossDomain: true,
-  			async:false,
-  			jsonp: "jsonpCallback",
-  			contentType: "application/json; charset=utf-8",
-  			success:function(data){
-  				console.log(data.s);
-  				var data = data.o;
-  				//$.each(data,function(i,c){
-  					//$('body').append('<img src="'+c.image+'" />');
-  				//});
-  			}
-  		});
-  		
-  		//$.getJSON("http://gallery.dendnight.com/gallery/list.htm?callback=?", function (result) {console.log(result.t);});
-  	});
-  </script>
- </head>
- <body>
-  <div style="width:100px;height:100px;border:1px solid green;float:left;">1</div>
-  <div style="width:100px;height:100px;border:1px solid blue;float:right;">3</div>
-  <div style="width:100px;height:100px;border:1px solid #f00;margin:0 auto;">2</div>
- </body>
+<head>
+<meta charset="UTF-8">
+<meta name="Generator" content="EditPlus®">
+<meta name="Author" content="">
+<style type="text/css">
+body,div,a,img {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font: bold 12px "微软黑体";
+}
+
+.container {
+	position: absolute;
+	top: 0;
+}
+
+.imgShow {
+	position: absolute;
+	border: solid 1px #ccc;
+	padding: 10px;
+	width: 200px;
+	top: 0px;
+	left: 0px;
+	-webkit-transition: all .7s ease-out .1s;
+	-moz-transition: all .7s ease-out .1s;
+	-o-transition: all .7s ease-out .1s;
+	transition: all .7s ease-out .1s
+}
+
+img {
+	width: 100%;
+	border: none;
+}
+</style>
+</head>
+<body>
+	<div class="container">
+		<div class="imgShow">
+			<a href="images/temp/temp_img02.jpg"><img src="images/temp/temp_img02.jpg" /></a>
+		</div>
+		<div class="imgShow">
+			<a href="images/temp/temp_img03.jpg"><img src="images/temp/temp_img03.jpg" /></a>
+		</div>
+		<div class="imgShow">
+			<a href="images/temp/temp_img09.jpg"><img src="images/temp/temp_img09.jpg" /></a>
+		</div>
+		<div class="imgShow">
+			<a href="images/temp/temp_img05.jpg"><img src="images/temp/temp_img05.jpg" /></a>
+		</div>
+		<div class="imgShow">
+			<a href="images/temp/temp_img06.jpg"><img src="images/temp/temp_img06.jpg" /></a>
+		</div>
+		<div class="imgShow">
+			<a href="images/temp/temp_img07.jpg"><img src="images/temp/temp_img07.jpg" /></a>
+		</div>
+		<div class="imgShow">
+			<a href="images/temp/temp_img08.jpg"><img src="images/temp/temp_img08.jpg" /></a>
+		</div>
+		<div class="imgShow">
+			<a href="images/temp/temp_img09.jpg"><img src="images/temp/temp_img09.jpg" /></a>
+		</div>
+		<div class="imgShow">
+			<a href="images/temp/temp_img10.jpg"><img src="images/temp/temp_img10.jpg" /></a>
+		</div>
+		<div class="imgShow">
+			<a href="images/temp/temp_img11.jpg"><img src="images/temp/temp_img11.jpg" /></a>
+		</div>
+		<div class="imgShow">
+			<a href="images/temp/temp_img12.jpg"><img src="images/temp/temp_img12.jpg" /></a>
+		</div>
+		<div class="imgShow">
+			<a href="images/temp/temp_img13.jpg"><img src="images/temp/temp_img13.jpg" /></a>
+		</div>
+		<div class="imgShow">
+			<a href="images/temp/temp_img14.jpg"><img src="images/temp/temp_img14.jpg" /></a>
+		</div>
+		<div class="imgShow">
+			<a href="images/temp/temp_img15.jpg"><img src="images/temp/temp_img15.jpg" /></a>
+		</div>
+		<div class="imgShow">
+			<a href="images/temp/temp_img15.jpg"><img src="images/temp/temp_img15.jpg" /></a>
+		</div>
+	</div>
+	<script type="text/javascript">
+		document.getElementsByClassName = function(className, tag, elm) {
+			var testClass = new RegExp("(^|\s)" + className + "(\s|$)");
+			var tag = tag || "*";
+			var elm = elm || document;
+			var elements = (tag == "*" && elm.all) ? elm.all : elm
+					.getElementsByTagName(tag);
+			var returnElements = [];
+			var current;
+			var length = elements.length;
+			for (var i = 0; i < length; i++) {
+				current = elements[i];
+				if (testClass.test(current.className)) {
+					returnElements.push(current);
+				}
+			}
+			return returnElements;
+		}
+
+		var margin = 10;
+		var boxes = document.getElementsByClassName('imgShow');
+		var con = document.getElementsByClassName('container');
+		var text = document.getElementsByTagName('h4');
+		var boxWidth = boxes[0].offsetWidth + margin;
+		function show() {
+			var columnHeight = [];
+			var bodyWidth = document.body.offsetWidth;
+			var n = parseInt(bodyWidth / boxWidth);
+			var columnNum = n == 0 ? 1 : n;
+			var bodyLeft = bodyWidth >= boxWidth ? bodyWidth - columnNum
+					* boxWidth : 0;
+			con[0].style.left = parseInt(bodyLeft / 2) - margin / 2 + 'px';
+			for (var i = 0, l = boxes.length; i < l; i++) {
+				if (i < columnNum) {
+					columnHeight[i] = boxes[i].offsetHeight + margin;
+					boxes[i].style.top = 0;
+					boxes[i].style.left = i * boxWidth + margin + 'px';
+				} else {
+					var innsertColumn = min(columnHeight), imgHeight = boxes[i].offsetHeight
+							+ margin;
+					boxes[i].style.top = columnHeight[innsertColumn] + 'px';
+					boxes[i].style.left = innsertColumn * boxWidth + margin
+							+ 'px';
+					columnHeight[innsertColumn] += imgHeight;
+				}
+				;
+
+			}
+			;
+		};
+		function min(heightAarry) {
+			var minColumn = 0;
+			var minHeight = heightAarry[minColumn];
+			for (var i = 1, len = heightAarry.length; i < len; i++) {
+				var temp = heightAarry[i];
+				if (temp < minHeight) {
+					minColumn = i;
+					minHeight = temp;
+				}
+				;
+			}
+			;
+			return minColumn;
+		}
+		window.onload = function() {
+			show();
+		};
+		window.onresize = function() {
+			show();
+		};
+	</script>
+</body>
 </html>
