@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0 ,maximum-scale=1 ,minimum-scale=1">
+<meta name="Generator" content="EditPlus®">
+<meta name="Author" content="">
+<meta name="Keywords" content="">
+<meta name="Description" content="">
+<title>Document</title>
+<style type="text/css">
+body,div,a,img {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font: bold 12px "微软黑体";
+}
+
+.container {
+	position: absolute;
+	top: 0;
+}
+
+.item {
+	position: absolute;
+	border: solid 1px #ccc;
+	padding: 10px;
+	width: 200px;
+	top: 0px;
+	left: 0px;
+	-webkit-transition: all .7s ease-out .1s;
+	-moz-transition: all .7s ease-out .1s;
+	-o-transition: all .7s ease-out .1s;
+	transition: all .7s ease-out .1s
+}
+
+@media ( max-width : 640px) {
+	.item {
+		width: 300px;
+	}
+}
+
+img {
+	width: 100%;
+	border: none;
+}
+</style>
+</head>
+<body>
+	<div class="container">
+		<div class="item">
+			<a href="images/temp/temp_img02.jpg"><img
+				src="images/temp/temp_img02.jpg" /></a>
+		</div>
+		<div class="item">
+			<a href="images/temp/temp_img03.jpg"><img
+				src="images/temp/temp_img03.jpg" /></a>
+		</div>
+		<div class="item">
+			<a href="images/temp/temp_img09.jpg"><img
+				src="images/temp/temp_img09.jpg" /></a>
+		</div>
+		<div class="item">
+			<a href="images/temp/temp_img05.jpg"><img
+				src="images/temp/temp_img05.jpg" /></a>
+		</div>
+		<div class="item">
+			<a href="images/temp/temp_img06.jpg"><img
+				src="images/temp/temp_img06.jpg" /></a>
+		</div>
+		<div class="item">
+			<a href="images/temp/temp_img07.jpg"><img
+				src="images/temp/temp_img07.jpg" /></a>
+		</div>
+		<div class="item">
+			<a href="images/temp/temp_img08.jpg"><img
+				src="images/temp/temp_img08.jpg" /></a>
+		</div>
+		<div class="item">
+			<a href="images/temp/temp_img09.jpg"><img
+				src="images/temp/temp_img09.jpg" /></a>
+		</div>
+		<div class="item">
+			<a href="images/temp/temp_img10.jpg"><img
+				src="images/temp/temp_img10.jpg" /></a>
+		</div>
+		<div class="item">
+			<a href="images/temp/temp_img11.jpg"><img
+				src="images/temp/temp_img11.jpg" /></a>
+		</div>
+		<div class="item">
+			<a href="images/temp/temp_img12.jpg"><img
+				src="images/temp/temp_img12.jpg" /></a>
+		</div>
+		<div class="item">
+			<a href="images/temp/temp_img13.jpg"><img
+				src="images/temp/temp_img13.jpg" /></a>
+		</div>
+		<div class="item">
+			<a href="images/temp/temp_img14.jpg"><img
+				src="images/temp/temp_img14.jpg" /></a>
+		</div>
+		<div class="item">
+			<a href="images/temp/temp_img15.jpg"><img
+				src="images/temp/temp_img15.jpg" /></a>
+		</div>
+		<div class="item">
+			<a href="images/temp/temp_img15.jpg"><img
+				src="images/temp/temp_img15.jpg" /></a>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		var margin = 10;
+		var item = document.querySelectorAll('.item');
+		var container = document.querySelectorAll('.container');
+		var itemWidth = item[0].offsetWidth + margin;
+
+		function show() {
+			var columnHeight = [];
+			var bodyWidth = document.body.offsetWidth;// body区域的宽
+			var n = parseInt(bodyWidth / itemWidth);
+			var columnNum = n == 0 ? 1 : n;// 页面最多能放多少列
+			var bodyLeft = bodyWidth >= itemWidth ? bodyWidth - columnNum
+					* itemWidth : 0;
+			container[0].style.left = parseInt(bodyLeft / 2 - margin / 2)
+					+ 'px';//  设置页面左边空出来的宽度
+			var insertColumn, imgHeight;
+			for (var i = 0; i < item.length; i++) {
+				// 图片数量小于列数
+				if (i < columnNum) {
+					columnHeight[i] = item[i].offsetHeight + margin;
+					item[i].style.top = 0;
+					item[i].style.left = parseInt(i * itemWidth + margin)
+							+ 'px';
+				} else {
+					insertColumn = min(columnHeight);
+					imgHeight = item[i].offsetHeight + margin;
+					item[i].style.top = columnHeight[insertColumn] + 'px';
+					item[i].style.left = insertColumn * itemWidth + margin
+							+ 'px';
+					columnHeight[insertColumn] += imgHeight;
+				}
+			}
+		}
+
+		function min(heightArray) {
+			var minColumn = 0;
+			var minHeight = heightArray[minColumn];
+			var temp;
+			for (var i = 0; i < heightArray.length; i++) {
+				temp = heightArray[i];
+				if (temp < minHeight) {
+					minColumn = i;
+					minHeight = temp;
+				}
+			}
+
+			return minColumn;
+		}
+
+		window.onload = function() {
+			show();
+		}
+
+		window.onresize = function() {
+			show();
+		}
+	</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

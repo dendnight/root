@@ -1,60 +1,148 @@
 <!doctype html>
-<html>
-<head>
-<title>file input click() demo</title>
-<script type="text/javascript">
-	function doClick() {
-		var el = document.getElementById("fileElem");
-		if (el) {
-			el.click();
-		}
-	}
-	function handleFiles(files) {
-		var d = document.getElementById("fileList");
-		if (!files.length) {
-			d.innerHTML = "<p>No files selected!</p>";
-		} else {
-			var list = document.createElement("ul");
-			d.appendChild(list);
-			for (var i = 0; i < files.length; i++) {
-				var li = document.createElement("li");
-				list.appendChild(li);
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
 
-				var img = document.createElement("img");
-				img.src = window.URL.createObjectURL(files[i]);
-				img.height = 60;
-				img.onload = function() {
-					window.URL.revokeObjectURL(this.src);
-				}
-				li.appendChild(img);
-
-				var info = document.createElement("span");
-				info.innerHTML = files[i].name + ": " + files[i].size
-						+ " bytes";
-				li.appendChild(info);
-			}
-		}
-	}
+ </head>
+ <body>
+  <input type="file" id="images" multiple accept="image/*" style="display:none;" />
+  <a href="#" id="fileSelect">Select Image</a>&nbsp;&nbsp;<a href="#" id="upload">Upload Image</a>
+  <div id="dropbox" style="height:200px;width:300px;border:1px solid #333;"></div>
+  <span id="preview"></span>
 
 	
-</script>
-</head>
-<body>
-	<p>
-		This is a demo of calling
-		<code>click()</code>
-		on a form's file picker. Note that the file input element is actually
-		hidden here, so the user doesn't have to see the path to the selected
-		file.
-	</p>
-	<form>
-		<input type="file" id="fileElem" multiple accept="image/*"
-			style="display: none" onchange="handleFiles(this.files)">
-	</form>
-	<a href="javascript:doClick();">Select some files</a><a href="javascript:upload();">upload Image</a>
-	<div id="fileList">
-		<p>No files selected!</p>
-	</div>
-</body>
-</html>
 
+  <script>
+	if(!window.File){
+		alert('sorry!');
+	}
+	
+	var inputElement = document.getElementById("images"),// type="file"
+	fileSelect = document.getElementById("fileSelect"),// a || button ...
+	dropbox = document.getElementById("dropbox"),// 
+	upload = document.getElementById("upload"),
+	preview = document.getElementById("preview");// view image 
+
+	dropbox.addEventListener("dragenter",function(e){
+		e.stopPropagation();
+		e.preventDefault();
+	},false);
+
+	dropbox.addEventListener("deagvoer",function(e){
+		e.stopPropagation();
+		e.preventDefault();
+	},false);
+
+	dropbox.addEventListener("drop",function(e){
+		e.stopPropagation();
+		e.preventDefault();
+
+		var files = e.dataTransfer.files;
+		alert(1);
+		handleFiles(files);
+	},false);
+
+	fileSelect.addEventListener("click",function(e){
+		if(fileSelect){
+			inputElement.click();
+		}
+		e.preventDefault();
+	},false);
+
+	inputElement.addEventListener("change",function(){
+		handleFiles2(this.files);
+
+	},false);
+
+	function handleFiles(files){
+		for(var i = 0; i< files.length ; i++){
+			var file = files[i];
+			
+			var imageType = /image.*/;
+
+			if(!file.type.match(imageType)){
+				continue;
+			}
+
+			var img = document.createElement("img");
+			img.classList.add("item");
+			img.file = file;
+			img.height = 100;
+
+			preview.appendChild(img);
+
+			var reader = new FileReader();
+			reader.onload = (function(aImg){return function(e){aImg.src=e.target.result;};})(img)
+			reader.readAsDataURL(file);
+		}
+	}
+	
+	window.URL = window.URL || window.webkitURL;
+
+	function handleFiles2(files){
+		for(var i = 0;i<files.length;i++){
+			var img = document.createElement("img");
+			img.classList.add("item");
+			img.file = files[i];
+			img.src = window.URL.createObjectURL(files[i]);
+			img.height = 100;
+			img.onload = function(e){
+				window.URL.revokeObjectURL(this.src);
+			}
+			preview.appendChild(img);
+
+		}
+	}
+	
+	upload.addEventListener("click",function(){
+		var imgs = document.querySelectorAll(".item");
+        
+        for(var i = 0;i < imgs.length;i++){
+			new fileUpload(imgs[i],imgs[i].file);
+		}
+	},false);
+
+	function fileUpload(img,file){
+/* 		console.log(img);
+ */		
+		var self = this;
+		var xhr = new XMLHttpRequest();
+		if (xhr.upload) {
+			// 上传中
+			xhr.upload.addEventListener("progress", function(e) {
+				if(e.lengthComputable){
+					console.log(paseInt(Math.round((e.loaded * 100) / e.total)));
+				}
+				console.log(e.loaded);
+				console.log(e.total);
+				console.log(e);
+			}, false);
+	
+			// 文件上传成功或是失败
+			xhr.onreadystatechange = function(e) {
+				if (xhr.readyState == 4) {
+					if (xhr.status == 200) {
+						console.log("ok");
+					
+					} else {
+						console.log("sorry");
+					}
+				}
+			};
+	
+			var fd = new FormData();
+			xhr.open("POST", 'upload.htm', true);
+			fd.append('images', file);
+			xhr.send(fd);
+		}
+
+	}
+  </script>
+
+ </body>
+</html>
