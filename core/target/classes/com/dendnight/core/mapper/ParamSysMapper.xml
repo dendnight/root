@@ -32,16 +32,6 @@
     delete from param_sys
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.dendnight.core.domain.ParamSys" useGeneratedKeys="true" keyProperty="id" >
-    insert into param_sys (name, code, value, 
-      readme, relation, created_time, 
-      created_by, updated_time, updated_by, 
-      deleted, version)
-    values (#{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}, 
-      #{readme,jdbcType=VARCHAR}, #{relation,jdbcType=INTEGER}, #{createdTime,jdbcType=TIMESTAMP}, 
-      #{createdBy,jdbcType=INTEGER}, #{updatedTime,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=INTEGER}, 
-      #{deleted,jdbcType=TINYINT}, #{version,jdbcType=INTEGER})
-  </insert>
   <insert id="insertSelective" parameterType="com.dendnight.core.domain.ParamSys" useGeneratedKeys="true" keyProperty="id" >
     insert into param_sys
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -169,4 +159,28 @@
       version = #{version,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="count" parameterType="com.dendnight.core.criteria.ParamSysCriteria" resultType="java.lang.Integer">
+      select count(param_sys.id) from param_sys param_sys 
+      <if test="null != _parameter">
+          <include refid="list_where"/>
+      </if>
+  </select>
+  
+  <sql id="list_where">
+      <if test="null != deleted">
+          and param_sys.deleted = #{deleted}
+      </if>
+  </sql>
+  
+  <select id="list">
+      select <include refid="Base_Column_List"/> from param_sys param_sys 
+      <if test="null != _parameter">
+          <include refid="list_where"/>
+      </if>
+      ORDER BY ${sort} ${order}
+	  <if test="pagesize != 0">
+		LIMIT #{offset}, #{pagesize}
+	  </if>
+  </select>
 </mapper>

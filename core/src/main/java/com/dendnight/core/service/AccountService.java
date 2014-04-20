@@ -30,7 +30,7 @@ public interface AccountService {
 	 * @param password
 	 * @throws Exception
 	 */
-	int register(UserInf userInf, String password) throws Exception;
+	int signup(UserInf userInf, String password) throws Exception;
 
 	/**
 	 * 注销帐号
@@ -56,5 +56,5 @@ public interface AccountService {
 	 * @return
 	 * @throws Exception
 	 */
-	UserInf login(String username, String password) throws Exception;
+	UserInf signin(String username, String password) throws Exception;
 }

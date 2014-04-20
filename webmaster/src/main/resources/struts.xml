@@ -7,7 +7,7 @@
 	<!-- Constants -->
 	<constant name="struts.objectFactory" value="spring" />
 	<constant name="struts.i18n.encoding" value="UTF-8" />
-	<constant name="struts.action.extension" value="htm" />
+	<constant name="struts.action.extension" value="htm,do" />
 	<constant name="struts.serve.static" value="true" />
 	<constant name="struts.serve.static.browserCache" value="false" />
 	<constant name="struts.multipart.maxSize" value="1002097152" />
@@ -40,27 +40,10 @@
 	</package>
 
 	<package name="/" namespace="/" extends="default">
-	    <action name="signin" class="AccountAction" method="signin">
+	    <action name="signin" class="AccountAciton" method="signin">
 		    <interceptor-ref name="defaultStack"></interceptor-ref>
+		    <result>/index.jsp</result>
 		</action>
-	    <action name="signup" class="AccountAction" method="signup">
-		    <interceptor-ref name="defaultStack"></interceptor-ref>
-		</action>
-	    
-	    <action name="upload" class="UploadImagesAction" >
-	        <interceptor-ref name="defaultStack"></interceptor-ref>
-	    </action>
-	    
-	    <action name="gallery" class="GalleryAction">
-	        <interceptor-ref name="defaultStack"></interceptor-ref>
-	        <result>/WEB-INF/page/gallery.jsp</result>
-	    </action>
 	</package>
 	
-	
-	<package name="gallery" namespace="/gallery" extends="default">
-	    <action name="list" class="GalleryAction" method="list">
-	        <interceptor-ref name="defaultStack"></interceptor-ref>
-	    </action>
-	</package>
 </struts>

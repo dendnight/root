@@ -41,7 +41,7 @@ public class AccountServiceImpl implements AccountService {
 	private UserInfMapper userInfMapper;
 
 	@Override
-	public int register(UserInf userInf, String password) throws Exception {
+	public int signup(UserInf userInf, String password) throws Exception {
 
 		userInf.setUserType("V");
 		userInf.setCreatedBy(0);
@@ -91,7 +91,7 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public UserInf login(String username, String password) throws Exception {
+	public UserInf signin(String username, String password) throws Exception {
 		// 查询帐号
 		password = Md5Utils.getMd5ByStr(password);
 		AccountInf accountInf = accountInfMapper.login(username, password);
