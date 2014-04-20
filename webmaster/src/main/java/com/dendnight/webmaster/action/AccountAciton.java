@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.dendnight.common.BaseAction;
+import com.dendnight.common.LoginInfo;
+import com.dendnight.core.domain.UserInf;
 import com.dendnight.core.service.AccountService;
 
 /**
@@ -45,12 +47,25 @@ public class AccountAciton extends BaseAction {
 	 * @return
 	 */
 	public String signin() {
+		UserInf user = null;
 		try {
-			accountService.signin(username, password);
+			user = accountService.signin(username, password);
+
+			if (null == user) {
+				this.addActionError("密码错误");
+			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			this.addActionError(e.getMessage());
+			return INPUT;
 		}
+
+		LoginInfo info = new LoginInfo();
+		info.setId(user.getId());
+		info.setNickname(user.getName());
+
+		info.setUsername(username);
+		info.setUsertype(user.getUserType());
+		session.put(LOGININFO, info);
 		return SUCCESS;
 	}
 

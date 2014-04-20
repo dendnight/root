@@ -43,7 +43,15 @@
 	    <action name="signin" class="AccountAciton" method="signin">
 		    <interceptor-ref name="defaultStack"></interceptor-ref>
 		    <result>/index.jsp</result>
+		    <result name="input">/index.jsp</result>
 		</action>
 	</package>
 	
+	
+	<package name="/sys" namespace="/sys" extends="default">
+	    <action name="create" class="ParamSysAction" method="create">
+	        <result>/WEB-INF/param-sys/create.jsp</result>
+	        <result name="input">/WEB-INF/param-sys/create.jsp</result>
+	    </action>
+	</package>
 </struts>

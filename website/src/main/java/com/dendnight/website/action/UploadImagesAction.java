@@ -16,7 +16,9 @@ import org.springframework.stereotype.Controller;
 import com.dendnight.common.BaseAction;
 import com.dendnight.common.Md5Utils;
 import com.dendnight.core.domain.ImageInf;
+import com.dendnight.core.domain.ParamSys;
 import com.dendnight.core.service.ImageService;
+import com.dendnight.core.service.ParamSysService;
 
 /**
  * 上传图片
@@ -46,6 +48,9 @@ public class UploadImagesAction extends BaseAction {
 	@Autowired
 	private ImageService imageService;
 
+	@Autowired
+	private ParamSysService paramSysService;
+
 	private File[] images;
 	private String[] imagesContentType;
 	private String[] imagesFileName;
@@ -59,6 +64,14 @@ public class UploadImagesAction extends BaseAction {
 			return JSON;
 		}
 
+		ParamSys param = paramSysService.query(info(), "IMG_ROOT");// TODO
+		if (null == param) {
+			json.put(S, 0);
+			json.put(M, "参数错误");
+			return JSON;
+
+		}
+		String root = param.getValue();
 		for (int i = 0; i < images.length; i++) {
 
 			int width = 0;// FIXME 图片属性
@@ -79,7 +92,7 @@ public class UploadImagesAction extends BaseAction {
 					path = "pictures/" + dateTime + uuid
 							+ imagesFileName[i].substring(imagesFileName[i].lastIndexOf('.'));
 					// 创建一个新 File 实例
-					File imageFile = new File("D:/temp/" + path);
+					File imageFile = new File(root + path);
 					// 判断路径是否存在
 					if (!imageFile.getParentFile().exists()) {
 						// 如果不存在，则递归创建此路径

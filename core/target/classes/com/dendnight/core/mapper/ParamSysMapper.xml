@@ -173,7 +173,7 @@
       </if>
   </sql>
   
-  <select id="list">
+  <select id="list" parameterType="com.dendnight.core.criteria.ParamSysCriteria" resultMap="BaseResultMap">
       select <include refid="Base_Column_List"/> from param_sys param_sys 
       <if test="null != _parameter">
           <include refid="list_where"/>
@@ -182,5 +182,12 @@
 	  <if test="pagesize != 0">
 		LIMIT #{offset}, #{pagesize}
 	  </if>
+  </select>
+  
+  <select id="selectByCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from param_sys param_sys
+    where param_sys.code = #{code}
   </select>
 </mapper>

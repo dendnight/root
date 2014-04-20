@@ -2,6 +2,8 @@ package com.dendnight.core.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.dendnight.core.criteria.ParamSysCriteria;
 import com.dendnight.core.domain.ParamSys;
 
@@ -31,4 +33,12 @@ public interface ParamSysMapper {
 	 * @return
 	 */
 	List<ParamSys> list(ParamSysCriteria criteria);
+
+	/**
+	 * 按code查询
+	 * 
+	 * @param code
+	 * @return
+	 */
+	ParamSys selectByCode(@Param("code") String code);
 }

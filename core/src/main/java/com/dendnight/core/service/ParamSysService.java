@@ -59,7 +59,7 @@ public interface ParamSysService {
 	void delete(LoginInfo info, int id);
 
 	/**
-	 * 查询
+	 * 按id查询
 	 * 
 	 * @param info
 	 * @param id
@@ -67,4 +67,12 @@ public interface ParamSysService {
 	 */
 	ParamSys query(LoginInfo info, int id);
 
+	/**
+	 * 按code查询
+	 * 
+	 * @param info
+	 * @param id
+	 * @return
+	 */
+	ParamSys query(LoginInfo info, String code);
 }

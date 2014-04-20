@@ -91,4 +91,13 @@ public class ParamSysServiceImpl implements ParamSysService {
 		}
 		return null;
 	}
+
+	@Override
+	public ParamSys query(LoginInfo info, String code) {
+		ParamSys paramSys = paramSysMapper.selectByCode(code);
+		if (null != paramSys && 0 != paramSys.getDeleted()) {
+			return paramSys;
+		}
+		return null;
+	}
 }

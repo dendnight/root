@@ -24,7 +24,7 @@ public class AccountServiceTest extends AbstractJUnit4SpringContextTests {
 		// fail("Not yet implemented");
 
 		UserInf user = new UserInf();
-		user.setName("Dendnight1");
+		user.setName("dendnight");
 		try {
 			accountService.signup(user, "buzhidao!");
 		} catch (Exception e) {
