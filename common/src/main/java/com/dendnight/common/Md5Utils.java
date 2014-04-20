@@ -2,9 +2,8 @@ package com.dendnight.common;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -66,28 +65,35 @@ public class Md5Utils {
 	 * @return
 	 */
 	public static String getMd5ByFile(File file) {
-		String value = null;
-		FileInputStream in = null;
+		InputStream fis;
+		byte[] buffer = new byte[1024];
+		int numRead = 0;
+		MessageDigest md5;
 		try {
-			MessageDigest md5 = MessageDigest.getInstance("MD5");
-			in = new FileInputStream(file);
-			byte[] buffer = new byte[4096];
-			int length = -1;
-			while ((length = in.read(buffer)) != -1) {
-				md5.update(buffer, 0, length);
+			fis = new FileInputStream(file);
+			md5 = MessageDigest.getInstance("MD5");
+			while ((numRead = fis.read(buffer)) > 0) {
+				md5.update(buffer, 0, numRead);
 			}
-			BigInteger bi = new BigInteger(1, md5.digest());
-			value = bi.toString(16);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			try {
-				in.close();
-			} catch (IOException ex) {
-			}
+			fis.close();
+			return toHexString(md5.digest());
+		} catch (Exception e) {
+			System.out.println("error");
+			return null;
 		}
-		return value.toUpperCase();
 	}
+
+	private static String toHexString(byte[] b) {
+		StringBuilder sb = new StringBuilder(b.length * 2);
+		for (int i = 0; i < b.length; i++) {
+			sb.append(HEX_DIGITS[(b[i] & 0xf0) >>> 4]);
+			sb.append(HEX_DIGITS[b[i] & 0x0f]);
+		}
+		return sb.toString();
+	}
+
+	private static final char HEX_DIGITS[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D',
+			'E', 'F' };
 
 	public static void main(String[] args) {
 		String v = Md5Utils.getMd5ByFile(new File("D:\\IMG_0069.MOV"));
