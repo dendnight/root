@@ -11,7 +11,7 @@
 		<pattern>/*.htm</pattern>
 	</decorator>
 
-	<decorator name="navbar" page="navbar.jsp" />
+	<decorator name="menu" page="menu.jsp" />
 	<decorator name="footer" page="footer.jsp" />
 	
 </decorators>
