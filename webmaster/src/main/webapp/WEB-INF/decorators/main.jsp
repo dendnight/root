@@ -12,16 +12,19 @@
 <meta name="author" content="dendnight" />
 <link rel="shortcut icon" href="images/favicon.ico" />
 <link rel="stylesheet" href="css/style.css">
-
 <decorator:head />
+
 </head>
 <body>
 	<div id="layout">
 		<page:applyDecorator name="menu" encoding="UTF-8"></page:applyDecorator>
 		<div id="main">
+
 			<decorator:body />
 		</div>
 		<page:applyDecorator name="footer" encoding="UTF-8"></page:applyDecorator>
 	</div>
+<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

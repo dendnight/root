@@ -7,7 +7,7 @@
 	<!-- Constants -->
 	<constant name="struts.objectFactory" value="spring" />
 	<constant name="struts.i18n.encoding" value="UTF-8" />
-	<constant name="struts.action.extension" value="htm,do" />
+	<constant name="struts.action.extension" value="htm" />
 	<constant name="struts.serve.static" value="true" />
 	<constant name="struts.serve.static.browserCache" value="false" />
 	<constant name="struts.multipart.maxSize" value="1002097152" />
@@ -39,19 +39,21 @@
 
 	</package>
 
+	<!-- 跳转页面和登录 -->
 	<package name="/" namespace="/" extends="default">
 	    <action name="signin" class="AccountAciton" method="signin">
 		    <interceptor-ref name="defaultStack"></interceptor-ref>
 		    <result>/index.jsp</result>
 		    <result name="input">/index.jsp</result>
 		</action>
+		
+	    <action name="sys-param">
+	        <result>/WEB-INF/param-sys/create.jsp</result>
+	    </action>
 	</package>
 	
 	
 	<package name="/sys" namespace="/sys" extends="default">
-	    <action name="create" class="ParamSysAction" method="create">
-	        <result>/WEB-INF/param-sys/create.jsp</result>
-	        <result name="input">/WEB-INF/param-sys/create.jsp</result>
-	    </action>
+	    <action name="create" class="ParamSysAction" method="create"></action>
 	</package>
 </struts>

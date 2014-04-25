@@ -10,7 +10,7 @@
 
 		<ul>
 			<li class="menu-item-divided menu-selected">
-				<a href="#">主页</a>
+				<a href="/index.jsp">主页</a>
 			</li>
 			<li>
 				<a href="#">用户管理</a>

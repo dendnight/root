@@ -64,10 +64,10 @@ public class ParamSysAction extends BaseAction {
 	 */
 	public String create() {
 		if (null == param) {
-			return INPUT;
+			return JSON;
 		}
 		paramSysService.create(info(), param);
-		return SUCCESS;
+		return JSON;
 	}
 
 	/**
