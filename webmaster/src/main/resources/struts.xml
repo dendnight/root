@@ -39,11 +39,9 @@
 
 	</package>
 
-	<!-- 跳转页面和登录 -->
 	<package name="/" namespace="/" extends="default">
-		<action name="signin">
-			<interceptor-ref name="defaultStack"></interceptor-ref>
-			<result>/WEB-INF/page/signin.jsp</result>
+		<action name="index">
+			<result>/WEB-INF/page/index.jsp</result>
 		</action>
 
 		<!-- 系统参数管理页面 -->

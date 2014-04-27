@@ -1,5 +1,7 @@
 package com.dendnight.webmaster.action;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -47,16 +49,15 @@ public class AccountAciton extends BaseAction {
 	 * @return
 	 */
 	public String signin() {
+		json = new HashMap<String, Object>();
+
 		UserInf user = null;
 		try {
 			user = accountService.signin(username, password);
-
-			if (null == user) {
-				this.addActionError("密码错误");
-			}
 		} catch (Exception e) {
-			this.addActionError(e.getMessage());
-			return INPUT;
+			json.put(M, e.getMessage());
+			json.put(S, 0);
+			return JSON;
 		}
 
 		LoginInfo info = new LoginInfo();
@@ -66,7 +67,9 @@ public class AccountAciton extends BaseAction {
 		info.setUsername(username);
 		info.setUsertype(user.getUserType());
 		session.put(LOGININFO, info);
-		return SUCCESS;
+
+		json.put(S, 1);
+		return JSON;
 	}
 
 	/**

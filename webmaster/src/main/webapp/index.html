@@ -1,29 +1,94 @@
 <!doctype html>
 <html lang="zh">
- <head>
-  <meta charset="UTF-8">
-  <meta name="Generator" content="EditPlus®">
-  <meta name="Author" content="">
-  <meta name="Keywords" content="">
-  <meta name="Description" content="">
-  <title>dendnight</title>
- </head>
- <body>
-  <form action="signin.htm" method="post">
-  	<table>
-  		<tr>
-  			<td>帐号</td>
-  			<td><input type="text" name="username"/></td>
-  		</tr>
-  		<tr>
-  			<td>密码</td>
-  			<td><input type="password" name="password"/></td>
-  		</tr>
-  		<tr>
-  			<td>&nbsp;</td>
-  			<td><input type="submit" value="登录"/></td>
-  		</tr>
-  	</table>
-  </form>
- </body>
+<head>
+<title>Dendnight</title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1" />
+<meta name="author" content="dendnight" />
+<link rel="shortcut icon" href="images/favicon.ico" />
+<link rel="stylesheet" href="css/signin.css">
+<link rel="stylesheet" href="css/notifIt.css">
+<link rel="stylesheet" href="css/nprogress.css">
+</head>
+<body>
+	<div id="layout">
+		<div id="main">
+			<div id="header">Dendnight</div>
+			<div id="container">
+				<div class="signin">
+					<form id="signin" action="account/signin.htm" method="post">
+						<div>
+							<input id="username" type="text" name="username"  placeholder="帐号" autocomplete="off" />
+						</div>
+						<div>
+							<input id="password" type="password" name="password" placeholder="密码" autocomplete="off" />
+						</div>
+						<div>
+							<button id="btn-submit" type="button">登录</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div id="footer">
+			<div>Copyright 2014</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+	<script type="text/javascript" src="js/jquery.form.js"></script>
+	<script type="text/javascript" src="js/jquery.notifIt.js"></script>
+	<script type="text/javascript" src="js/jquery.nprogress.js"></script>
+	<script type="text/javascript">
+		$(function() {
+
+			$('#btn-submit').click(function(){
+				var btn = $(this);
+				if("验证中..." == btn.text()){
+					return false;
+				}
+				btn.text("验证中...");
+				NProgress.start();
+				// 验证参数
+				if("" == $('#username').val()){
+					NProgress.done();
+					notif({
+						msg : "<b>提示：</b>帐号不能为空",
+						type : "warning",
+						position : "center"
+					});
+					btn.text("登录");
+					return false;
+				}
+				
+				if("" == $('#password').val()){
+					NProgress.done();
+					notif({
+						msg : "<b>提示：</b>密码不能为空",
+						type : "warning",
+						position : "center"
+					});
+					btn.text("登录");
+					return false;
+				}
+				
+				$('#signin').ajaxSubmit(function(data) {
+					NProgress.done();
+					if (data.s) {
+						window.location.href = "index.htm";
+					} else {
+						notif({
+							msg : "<b>错误：</b>" + data.m,
+							type : "error",
+							position : "center"
+						});
+						btn.text("登录");
+					}
+				});
+				return false;
+			});
+			
+		});
+	</script>
+</body>
 </html>
