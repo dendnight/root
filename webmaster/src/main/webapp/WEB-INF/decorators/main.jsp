@@ -17,10 +17,15 @@
 </head>
 <body>
 	<div id="layout">
-		<page:applyDecorator name="menu" encoding="UTF-8"></page:applyDecorator>
+		<s:if test="null != #session.loginInfo">
+			<page:applyDecorator name="menu" encoding="UTF-8"></page:applyDecorator>
+		</s:if>
+		
 		<div id="main">
-
-			<decorator:body />
+			<div id="header"><decorator:title default="Dendnight" /></div>
+			<div id="container">
+				<decorator:body />
+			</div>
 		</div>
 		<page:applyDecorator name="footer" encoding="UTF-8"></page:applyDecorator>
 	</div>

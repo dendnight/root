@@ -62,14 +62,6 @@ public class BaseAction extends ActionSupport implements SessionAware {
 	/** 是否超时 */
 	protected boolean timeout = false;
 
-	public Map<String, Object> getJson() {
-		return json;
-	}
-
-	public void setJson(Map<String, Object> json) {
-		this.json = json;
-	}
-
 	/**
 	 * 登录信息
 	 * 
@@ -77,6 +69,15 @@ public class BaseAction extends ActionSupport implements SessionAware {
 	 */
 	public LoginInfo info() {
 		return (LoginInfo) session.get(LOGININFO);
+	}
+
+	/**
+	 * 默认跳转
+	 * 
+	 * @return
+	 */
+	public String execute() {
+		return SUCCESS;
 	}
 
 	public Map<String, Object> getSession() {
@@ -93,6 +94,14 @@ public class BaseAction extends ActionSupport implements SessionAware {
 
 	public void setTimeout(boolean timeout) {
 		this.timeout = timeout;
+	}
+
+	public Map<String, Object> getJson() {
+		return json;
+	}
+
+	public void setJson(Map<String, Object> json) {
+		this.json = json;
 	}
 
 }

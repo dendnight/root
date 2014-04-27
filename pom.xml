@@ -11,15 +11,15 @@
 
 	<modules>
 		<module>core</module>
+		<module>common</module>
 		<module>website</module>
 		<module>webmaster</module>
-		<module>test</module>
-		<module>tools</module>
-		<module>common</module>
+		<!-- <module>test</module>
+		<module>tools</module> -->
 	</modules>
 
 	<properties>
-		<!--指定Maven用什么编码来读取源码及文�? -->
+		<!--指定Maven用什么编码来读取源码及文件 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!--指定Maven用什么编码来呈现站点的HTML文件 -->
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

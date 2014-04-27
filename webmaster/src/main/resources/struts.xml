@@ -14,7 +14,7 @@
 	<constant name="struts.ui.theme" value="simple" />
 	<constant name="struts.enable.SlashesInActionNames" value="true" />
 
-	<constant name="struts.devMode" value="true" /> 
+	<constant name="struts.devMode" value="true" />
 	<!-- 提供json 格式的支持 -->
 	<package name="default" extends="json-default">
 
@@ -24,7 +24,7 @@
 			<interceptor-stack name="baseInterceptorStack">
 				<interceptor-ref name="defaultStack" />
 				<interceptor-ref name="authority" />
-				
+
 			</interceptor-stack>
 		</interceptors>
 		<default-interceptor-ref name="baseInterceptorStack"></default-interceptor-ref>
@@ -41,19 +41,27 @@
 
 	<!-- 跳转页面和登录 -->
 	<package name="/" namespace="/" extends="default">
-	    <action name="signin" class="AccountAciton" method="signin">
-		    <interceptor-ref name="defaultStack"></interceptor-ref>
-		    <result>/index.jsp</result>
-		    <result name="input">/index.jsp</result>
+		<action name="signin">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result>/WEB-INF/page/signin.jsp</result>
 		</action>
-		
-	    <action name="sys-param">
-	        <result>/WEB-INF/param-sys/create.jsp</result>
+
+		<!-- 系统参数管理页面 -->
+		<action name="param-sys">
+			<result>/WEB-INF/page/param-system.jsp</result>
+		</action>
+	</package>
+
+	<!-- 帐号管理 -->
+	<package name="account" namespace="/account" extends="default">
+	    <action name="signin" class="AccountAciton" method="signin">
+	        <interceptor-ref name="defaultStack"></interceptor-ref>
 	    </action>
 	</package>
-	
-	
+
+	<!-- 系统参数管理 -->
 	<package name="/sys" namespace="/sys" extends="default">
-	    <action name="create" class="ParamSysAction" method="create"></action>
+		<action name="create" class="ParamSysAction" method="create"></action>
 	</package>
+	
 </struts>
