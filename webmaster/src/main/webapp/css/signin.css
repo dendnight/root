@@ -5,7 +5,7 @@ html,body {
 	color: #777;
 	font-family: sans-serif;
 	height: 100%;
-	background: url(../images/background.png) repeat-x;
+	background:#eeeeee url(../images/background.png) repeat-x;
 }
 
 #layout {
@@ -37,7 +37,7 @@ html,body {
 	padding: 0.8em 0 1em;
 	font-size: 2em;
 	color: #fff;
-	text-shadow: 1px 1px rgba(0, 0, 0, .3);
+	text-shadow: 1px 1px 0 rgba(0,0,0,1),1px 1px 5px rgba(255,255,255,.8);
 }
 
 #container {
