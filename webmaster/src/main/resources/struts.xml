@@ -34,18 +34,19 @@
 				<param name="root">json</param>
 			</result>
 			<!-- 超时 -->
-			<result name="timeout" type="redirect">/index.html</result>
+			<result name="timeout" type="redirect">/timeout.html</result>
 		</global-results>
 
 	</package>
 
 	<package name="/" namespace="/" extends="default">
-		<action name="index">
+	    <!-- 欢迎页 -->
+		<action name="index" class="AccountAciton">
 			<result>/WEB-INF/page/index.jsp</result>
 		</action>
 
 		<!-- 系统参数管理页面 -->
-		<action name="param-sys">
+		<action name="param-sys" class="ParamSysAction">
 			<result>/WEB-INF/page/param-system.jsp</result>
 		</action>
 	</package>

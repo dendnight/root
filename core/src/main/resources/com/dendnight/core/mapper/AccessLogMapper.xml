@@ -26,14 +26,6 @@
     delete from access_log
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.dendnight.core.domain.AccessLog" useGeneratedKeys="true" keyProperty="id" >
-    insert into access_log (user_id, ip, device, 
-      time, browser, os, 
-      details)
-    values (#{userId,jdbcType=INTEGER}, #{ip,jdbcType=VARCHAR}, #{device,jdbcType=VARCHAR}, 
-      #{time,jdbcType=TIMESTAMP}, #{browser,jdbcType=VARCHAR}, #{os,jdbcType=VARCHAR}, 
-      #{details,jdbcType=VARCHAR})
-  </insert>
   <insert id="insertSelective" parameterType="com.dendnight.core.domain.AccessLog" useGeneratedKeys="true" keyProperty="id" >
     insert into access_log
     <trim prefix="(" suffix=")" suffixOverrides="," >

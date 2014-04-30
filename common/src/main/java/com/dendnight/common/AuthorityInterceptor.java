@@ -35,17 +35,13 @@ public class AuthorityInterceptor extends AbstractInterceptor {
 		Map<String, Object> session = invocation.getInvocationContext().getSession();
 		HttpServletRequest request = ServletActionContext.getRequest();
 
-		Object o = invocation.getAction();
-		if (o instanceof BaseAction) {
-			BaseAction action = (BaseAction) o;
-			LoginInfo info = (LoginInfo) session.get(action.LOGININFO);
+		BaseAction action = (BaseAction) invocation.getAction();
+		LoginInfo info = (LoginInfo) session.get(action.LOGININFO);
 
-			if (info == null && isAjaxRequest(request)) {
-				action.setTimeout(true);
-			} else if (info == null) {
-				return action.TIMEOUT;
-			}
-			return invocation.invoke();
+		if (info == null && isAjaxRequest(request)) {
+			action.setTimeout(true);
+		} else if (info == null) {
+			return action.TIMEOUT;
 		}
 		return invocation.invoke();
 

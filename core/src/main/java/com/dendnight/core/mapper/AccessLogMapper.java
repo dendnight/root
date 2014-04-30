@@ -3,15 +3,13 @@ package com.dendnight.core.mapper;
 import com.dendnight.core.domain.AccessLog;
 
 public interface AccessLogMapper {
-    int deleteByPrimaryKey(Integer id);
+	int deleteByPrimaryKey(Integer id);
 
-    int insert(AccessLog record);
+	int insertSelective(AccessLog record);
 
-    int insertSelective(AccessLog record);
+	AccessLog selectByPrimaryKey(Integer id);
 
-    AccessLog selectByPrimaryKey(Integer id);
+	int updateByPrimaryKeySelective(AccessLog record);
 
-    int updateByPrimaryKeySelective(AccessLog record);
-
-    int updateByPrimaryKey(AccessLog record);
+	int updateByPrimaryKey(AccessLog record);
 }

@@ -27,7 +27,8 @@
 		</div>
 		<page:applyDecorator name="footer" encoding="UTF-8"></page:applyDecorator>
 	</div>
-<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
-<script type="text/javascript" src="js/main.js"></script>
+	<div>
+		<script type="text/javascript" src="js/head.load.js" data-headjs-load="js/main.js"></script>
+	</div>	
 </body>
 </html>

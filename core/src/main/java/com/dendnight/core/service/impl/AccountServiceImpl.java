@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.dendnight.common.LoginInfo;
 import com.dendnight.common.Md5Utils;
+import com.dendnight.core.domain.AccessLog;
 import com.dendnight.core.domain.AccountInf;
 import com.dendnight.core.domain.UserInf;
+import com.dendnight.core.mapper.AccessLogMapper;
 import com.dendnight.core.mapper.AccountInfMapper;
 import com.dendnight.core.mapper.UserInfMapper;
 import com.dendnight.core.service.AccountService;
@@ -39,6 +41,9 @@ public class AccountServiceImpl implements AccountService {
 
 	@Autowired
 	private UserInfMapper userInfMapper;
+
+	@Autowired
+	private AccessLogMapper accessLogMapper;
 
 	@Override
 	public int signup(UserInf userInf, String password) throws Exception {
@@ -94,17 +99,23 @@ public class AccountServiceImpl implements AccountService {
 	public UserInf signin(String username, String password) throws Exception {
 		// 查询帐号
 		password = Md5Utils.getMd5ByStr(password);
-		AccountInf accountInf = accountInfMapper.login(username, password);
-		if (null == accountInf || 1 == accountInf.getDeleted()) {
+		AccountInf account = accountInfMapper.login(username, password);
+		if (null == account || 1 == account.getDeleted()) {
 			throw new Exception("帐号不存在或密码错误");
 		}
-
+		int userId = account.getUserId();
 		// 更新登录次数和时间
-		accountInf.setCount(accountInf.getCount() + 1);
-		accountInf.setLastTime(new Date());
-		accountInfMapper.updateByPrimaryKeySelective(accountInf);
+		account.setCount(account.getCount() + 1);
+		account.setLastTime(new Date());
+		accountInfMapper.updateByPrimaryKeySelective(account);
+
+		// 记录访问信息
+		AccessLog access = new AccessLog();
+		access.setUserId(userId);
+		access.setDetails("用户登录");
+		accessLogMapper.insertSelective(access);
 
 		// 返回用户信息
-		return userInfMapper.selectByPrimaryKey(accountInf.getUserId());
+		return userInfMapper.selectByPrimaryKey(userId);
 	}
 }
