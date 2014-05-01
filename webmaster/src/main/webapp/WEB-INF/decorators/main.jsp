@@ -12,6 +12,7 @@
 <meta name="author" content="dendnight" />
 <link rel="shortcut icon" href="images/favicon.ico" />
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/main.css">
 <decorator:head />
 
 </head>
