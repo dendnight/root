@@ -13,6 +13,7 @@
 <link rel="shortcut icon" href="images/favicon.ico" />
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/nprogress.css"/>
 <decorator:head />
 
 </head>
@@ -29,6 +30,7 @@
 		<page:applyDecorator name="footer" encoding="UTF-8"></page:applyDecorator>
 	</div>
 	<div>
+		<script type="text/javascript" src="js/nprogress.js"></script>
 		<script type="text/javascript" src="js/head.load.js" data-headjs-load="js/main.js"></script>
 	</div>	
 </body>

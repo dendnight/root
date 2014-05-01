@@ -2,12 +2,15 @@ package com.dendnight.webmaster.action;
 
 import java.util.HashMap;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.dendnight.common.BaseAction;
 import com.dendnight.common.LoginInfo;
+import com.dendnight.common.WebUtil;
+import com.dendnight.core.domain.AccessLog;
 import com.dendnight.core.domain.UserInf;
 import com.dendnight.core.service.AccountService;
 
@@ -50,25 +53,38 @@ public class AccountAciton extends BaseAction {
 	 */
 	public String signin() {
 		json = new HashMap<String, Object>();
+		if (StringUtils.isBlank(username)) {
+			json.put(S, 0);
+			json.put(M, "帐号不能为空");
+			return JSON;
+		}
 
+		if (StringUtils.isBlank(password)) {
+			json.put(S, 0);
+			json.put(M, "密码不能为空");
+			return JSON;
+		}
+		// HttpServletRequest request = ServletActionContext.getRequest();
 		UserInf user = null;
 		try {
-			user = accountService.signin(username, password);
+			AccessLog access = new AccessLog();
+			access.setIp(WebUtil.getRemoteIP(request));
+			user = accountService.signin(username, password, access);
+			LoginInfo info = new LoginInfo();
+			info.setId(user.getId());
+			info.setNickname(user.getName());
+
+			info.setUsername(username);
+			info.setUsertype(user.getUserType());
+			session.put(LOGININFO, info);
+
+			json.put(S, 1);
 		} catch (Exception e) {
+			log.warn(e.getMessage(), e);
 			json.put(M, e.getMessage());
 			json.put(S, 0);
 			return JSON;
 		}
-
-		LoginInfo info = new LoginInfo();
-		info.setId(user.getId());
-		info.setNickname(user.getName());
-
-		info.setUsername(username);
-		info.setUsertype(user.getUserType());
-		session.put(LOGININFO, info);
-
-		json.put(S, 1);
 		return JSON;
 	}
 

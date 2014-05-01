@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.dendnight.common.BaseAction;
+import com.dendnight.common.WebUtil;
+import com.dendnight.core.domain.AccessLog;
 import com.dendnight.core.domain.UserInf;
 import com.dendnight.core.service.AccountService;
 
@@ -65,7 +67,9 @@ public class AccountAction extends BaseAction {
 		}
 
 		try {
-			accountService.signin(username, password);
+			AccessLog access = new AccessLog();
+			access.setIp(WebUtil.getRemoteIP(request));
+			accountService.signin(username, password, access);
 		} catch (Exception e) {
 			e.printStackTrace();
 			LOG.warn(e.getMessage(), e);

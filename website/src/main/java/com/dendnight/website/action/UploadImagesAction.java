@@ -92,6 +92,7 @@ public class UploadImagesAction extends BaseAction {
 					path = "pictures/" + dateTime + uuid
 							+ imagesFileName[i].substring(imagesFileName[i].lastIndexOf('.'));
 					// 创建一个新 File 实例
+					System.out.print(root + path);
 					File imageFile = new File(root + path);
 					// 判断路径是否存在
 					if (!imageFile.getParentFile().exists()) {

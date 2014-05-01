@@ -466,4 +466,5 @@
 
   return NProgress;
 });
-
+// 加载好JS就启动
+NProgress.start();

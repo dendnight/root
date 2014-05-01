@@ -2,6 +2,13 @@ package com.dendnight.common;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.struts2.interceptor.ServletRequestAware;
+import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -22,10 +29,12 @@ import com.opensymphony.xwork2.ActionSupport;
  * 
  * </pre>
  */
-public class BaseAction extends ActionSupport implements SessionAware {
+public class BaseAction extends ActionSupport implements SessionAware, ServletRequestAware, ServletResponseAware {
 
 	private static final long serialVersionUID = 541470551483275591L;
-
+	protected HttpServletRequest request;
+	protected Log log = LogFactory.getLog(BaseAction.class);
+	protected HttpServletResponse response;
 	/** 会话 */
 	protected Map<String, Object> session;
 
@@ -34,12 +43,6 @@ public class BaseAction extends ActionSupport implements SessionAware {
 
 	/** 登录超时 */
 	protected static final String TIMEOUT = "timeout";
-
-	/** 正确页面 */
-	protected static final String SUCCESS = "success";
-
-	/** 错误页面 */
-	protected static final String ERROR = "error";
 
 	/** 返回JSON */
 	protected static final String JSON = "json";
@@ -68,40 +71,76 @@ public class BaseAction extends ActionSupport implements SessionAware {
 	 * @return
 	 */
 	public LoginInfo info() {
-		return (LoginInfo) session.get(LOGININFO);
+		if (null == session) {
+			return null;
+		}
+
+		Object info = session.get(LOGININFO);
+		if (null == info) {
+			return null;
+		}
+
+		return (LoginInfo) info;
 	}
 
 	/**
-	 * 默认跳转
-	 * 
-	 * @return
+	 * @return the {@link #session}
 	 */
-	public String execute() {
-		return SUCCESS;
-	}
-
 	public Map<String, Object> getSession() {
 		return session;
 	}
 
+	/**
+	 * @param session
+	 *            the {@link #session} to set
+	 */
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
 	}
 
-	public boolean isTimeout() {
-		return timeout;
-	}
-
-	public void setTimeout(boolean timeout) {
-		this.timeout = timeout;
-	}
-
+	/**
+	 * @return the {@link #json}
+	 */
 	public Map<String, Object> getJson() {
 		return json;
 	}
 
+	/**
+	 * @param json
+	 *            the {@link #json} to set
+	 */
 	public void setJson(Map<String, Object> json) {
 		this.json = json;
 	}
 
+	/**
+	 * @return the {@link #timeout}
+	 */
+	public boolean isTimeout() {
+		return timeout;
+	}
+
+	/**
+	 * @param timeout
+	 *            the {@link #timeout} to set
+	 */
+	public void setTimeout(boolean timeout) {
+		this.timeout = timeout;
+	}
+
+	@Override
+	public void setServletResponse(HttpServletResponse response) {
+		this.response = response;
+
+	}
+
+	@Override
+	public void setServletRequest(HttpServletRequest request) {
+		this.request = request;
+
+	}
+
+	public String getSessionId() {
+		return request.getSession().getId();
+	}
 }

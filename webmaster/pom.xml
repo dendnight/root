@@ -70,8 +70,8 @@
 					<nosuffix>true</nosuffix>
 					<!-- 把文件压缩成一行 -->
 					<linebreakpos>-1</linebreakpos>
-					<!-- 指定需要压缩文件的目录，这是我的目录（修改为你自己的目录吧..) -->
-					<sourceDirectory>${basedir}/</sourceDirectory>
+					<!-- 指定需要压缩文件的目录 -->
+					<sourceDirectory>${basedir}</sourceDirectory>
 				</configuration>
 			</plugin>
 

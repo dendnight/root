@@ -96,7 +96,7 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public UserInf signin(String username, String password) throws Exception {
+	public UserInf signin(String username, String password, AccessLog access) throws Exception {
 		// 查询帐号
 		password = Md5Utils.getMd5ByStr(password);
 		AccountInf account = accountInfMapper.login(username, password);
@@ -110,9 +110,8 @@ public class AccountServiceImpl implements AccountService {
 		accountInfMapper.updateByPrimaryKeySelective(account);
 
 		// 记录访问信息
-		AccessLog access = new AccessLog();
 		access.setUserId(userId);
-		access.setDetails("用户登录");
+		access.setDetails("登录");
 		accessLogMapper.insertSelective(access);
 
 		// 返回用户信息

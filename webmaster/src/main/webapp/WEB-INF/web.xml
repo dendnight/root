@@ -36,7 +36,7 @@
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>struts-execute</filter-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>*.htm</url-pattern>
 	</filter-mapping>
 	<welcome-file-list>
 		<welcome-file>/index.html</welcome-file>
@@ -60,6 +60,10 @@
 	<error-page>
 		<error-code>404</error-code>
 		<location>/404.html</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/error.jsp</location>
 	</error-page>
 	<session-config>
 		<session-timeout>30</session-timeout>

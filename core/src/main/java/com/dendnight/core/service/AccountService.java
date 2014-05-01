@@ -1,6 +1,7 @@
 package com.dendnight.core.service;
 
 import com.dendnight.common.LoginInfo;
+import com.dendnight.core.domain.AccessLog;
 import com.dendnight.core.domain.AccountInf;
 import com.dendnight.core.domain.UserInf;
 
@@ -52,9 +53,11 @@ public interface AccountService {
 	/**
 	 * 登录
 	 * 
-	 * @param accountInf
+	 * @param username
+	 * @param password
+	 * @param access
 	 * @return
 	 * @throws Exception
 	 */
-	UserInf signin(String username, String password) throws Exception;
+	UserInf signin(String username, String password, AccessLog access) throws Exception;
 }

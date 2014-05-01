@@ -42,7 +42,7 @@ html,body {
 }
 
 #container {
-	height: 20em;
+	height: auto;
 	min-height: 100%;
 	width: 96%;
 	margin: 0 auto;
@@ -50,6 +50,7 @@ html,body {
 	padding: 0.8em 0 10em;
 	border-top-left-radius: 0.5em;
 	border-top-right-radius: 0.5em;
+	opacity: 0.2;
 }
 
 #footer div {
