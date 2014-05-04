@@ -2,19 +2,19 @@ package com.dendnight.core.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.dendnight.core.criteria.ImageInfCriteria;
 import com.dendnight.core.domain.ImageInf;
 
 public interface ImageInfMapper {
-	int deleteByPrimaryKey(String id);
+	int deleteByPrimaryKey(Integer id);
 
 	int insertSelective(ImageInf record);
 
-	ImageInf selectByPrimaryKey(String id);
+	ImageInf selectByPrimaryKey(Integer id);
 
 	int updateByPrimaryKeySelective(ImageInf record);
-
-	int updateByPrimaryKey(ImageInf record);
 
 	/**
 	 * 数量
@@ -31,4 +31,12 @@ public interface ImageInfMapper {
 	 * @return
 	 */
 	List<ImageInf> list(ImageInfCriteria criteria);
+
+	/**
+	 * 按md5查询
+	 * 
+	 * @param md5
+	 * @return
+	 */
+	ImageInf query(@Param("md5") String md5);
 }

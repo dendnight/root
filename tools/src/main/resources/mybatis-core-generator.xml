@@ -7,7 +7,7 @@
 
 	<!-- 配置mysql 驱动jar包路径.用了绝对路径 -->
 	<classPathEntry
-		location="C:\Users\dendnight\.m2\repository\mysql\mysql-connector-java\5.1.27\mysql-connector-java-5.1.27.jar" />
+		location="D:\repository\mysql\mysql-connector-java\5.1.27\mysql-connector-java-5.1.27.jar" />
 
 	<context id="mysql_tables" targetRuntime="MyBatis3">
 

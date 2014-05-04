@@ -2,14 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.dendnight.core.mapper.ImageInfMapper" >
   <resultMap id="BaseResultMap" type="com.dendnight.core.domain.ImageInf" >
-    <id column="image_inf_id" property="id" jdbcType="VARCHAR" />
+    <id column="image_inf_id" property="id" jdbcType="INTEGER" />
+    <result column="image_inf_md5" property="md5" jdbcType="VARCHAR" />
+    <result column="image_inf_name" property="name" jdbcType="VARCHAR" />
     <result column="image_inf_height" property="height" jdbcType="INTEGER" />
     <result column="image_inf_width" property="width" jdbcType="INTEGER" />
+    <result column="image_inf_thumbnail" property="thumbnail" jdbcType="VARCHAR" />
+    <result column="image_inf_original" property="original" jdbcType="VARCHAR" />
     <result column="image_inf_path" property="path" jdbcType="VARCHAR" />
     <result column="image_inf_longitude" property="longitude" jdbcType="DOUBLE" />
     <result column="image_inf_latitude" property="latitude" jdbcType="DOUBLE" />
     <result column="image_inf_readme" property="readme" jdbcType="VARCHAR" />
-    <result column="image_inf_count" property="count" jdbcType="INTEGER" />
+    <result column="image_inf_upload_count" property="uploadCount" jdbcType="INTEGER" />
     <result column="image_inf_camera_model" property="cameraModel" jdbcType="VARCHAR" />
     <result column="image_inf_camera_brand" property="cameraBrand" jdbcType="VARCHAR" />
     <result column="image_inf_lens_brand" property="lensBrand" jdbcType="VARCHAR" />
@@ -23,24 +27,26 @@
     <result column="image_inf_version" property="version" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    image_inf.id as image_inf_id, image_inf.height as image_inf_height, image_inf.width as image_inf_width, 
-    image_inf.path as image_inf_path, image_inf.longitude as image_inf_longitude, image_inf.latitude as image_inf_latitude, 
-    image_inf.readme as image_inf_readme, image_inf.count as image_inf_count, image_inf.camera_model as image_inf_camera_model, 
-    image_inf.camera_brand as image_inf_camera_brand, image_inf.lens_brand as image_inf_lens_brand, 
-    image_inf.date_taken as image_inf_date_taken, image_inf.lens_model as image_inf_lens_model, 
-    image_inf.program_name as image_inf_program_name, image_inf.created_time as image_inf_created_time, 
-    image_inf.updated_time as image_inf_updated_time, image_inf.updated_by as image_inf_updated_by, 
-    image_inf.deleted as image_inf_deleted, image_inf.version as image_inf_version
+    image_inf.id as image_inf_id, image_inf.md5 as image_inf_md5, image_inf.name as image_inf_name, 
+    image_inf.height as image_inf_height, image_inf.width as image_inf_width, image_inf.thumbnail as image_inf_thumbnail, 
+    image_inf.original as image_inf_original, image_inf.path as image_inf_path, image_inf.longitude as image_inf_longitude, 
+    image_inf.latitude as image_inf_latitude, image_inf.readme as image_inf_readme, image_inf.upload_count as image_inf_upload_count, 
+    image_inf.camera_model as image_inf_camera_model, image_inf.camera_brand as image_inf_camera_brand, 
+    image_inf.lens_brand as image_inf_lens_brand, image_inf.date_taken as image_inf_date_taken, 
+    image_inf.lens_model as image_inf_lens_model, image_inf.program_name as image_inf_program_name, 
+    image_inf.created_time as image_inf_created_time, image_inf.updated_time as image_inf_updated_time, 
+    image_inf.updated_by as image_inf_updated_by, image_inf.deleted as image_inf_deleted, 
+    image_inf.version as image_inf_version
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from image_inf image_inf
-    where image_inf.id = #{id,jdbcType=VARCHAR}
+    where image_inf.id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from image_inf
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insertSelective" parameterType="com.dendnight.core.domain.ImageInf" >
     insert into image_inf
@@ -48,11 +54,23 @@
       <if test="id != null" >
         id,
       </if>
+      <if test="md5 != null" >
+        md5,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
       <if test="height != null" >
         height,
       </if>
       <if test="width != null" >
         width,
+      </if>
+      <if test="thumbnail != null" >
+        thumbnail,
+      </if>
+      <if test="original != null" >
+        original,
       </if>
       <if test="path != null" >
         path,
@@ -66,8 +84,8 @@
       <if test="readme != null" >
         readme,
       </if>
-      <if test="count != null" >
-        count,
+      <if test="uploadCount != null" >
+        upload_count,
       </if>
       <if test="cameraModel != null" >
         camera_model,
@@ -105,13 +123,25 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
-        #{id,jdbcType=VARCHAR},
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="md5 != null" >
+        #{md5,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
       </if>
       <if test="height != null" >
         #{height,jdbcType=INTEGER},
       </if>
       <if test="width != null" >
         #{width,jdbcType=INTEGER},
+      </if>
+      <if test="thumbnail != null" >
+        #{thumbnail,jdbcType=VARCHAR},
+      </if>
+      <if test="original != null" >
+        #{original,jdbcType=VARCHAR},
       </if>
       <if test="path != null" >
         #{path,jdbcType=VARCHAR},
@@ -125,8 +155,8 @@
       <if test="readme != null" >
         #{readme,jdbcType=VARCHAR},
       </if>
-      <if test="count != null" >
-        #{count,jdbcType=INTEGER},
+      <if test="uploadCount != null" >
+        #{uploadCount,jdbcType=INTEGER},
       </if>
       <if test="cameraModel != null" >
         #{cameraModel,jdbcType=VARCHAR},
@@ -166,11 +196,23 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.dendnight.core.domain.ImageInf" >
     update image_inf
     <set >
+      <if test="md5 != null" >
+        md5 = #{md5,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
       <if test="height != null" >
         height = #{height,jdbcType=INTEGER},
       </if>
       <if test="width != null" >
         width = #{width,jdbcType=INTEGER},
+      </if>
+      <if test="thumbnail != null" >
+        thumbnail = #{thumbnail,jdbcType=VARCHAR},
+      </if>
+      <if test="original != null" >
+        original = #{original,jdbcType=VARCHAR},
       </if>
       <if test="path != null" >
         path = #{path,jdbcType=VARCHAR},
@@ -184,8 +226,8 @@
       <if test="readme != null" >
         readme = #{readme,jdbcType=VARCHAR},
       </if>
-      <if test="count != null" >
-        count = #{count,jdbcType=INTEGER},
+      <if test="uploadCount != null" >
+        upload_count = #{uploadCount,jdbcType=INTEGER},
       </if>
       <if test="cameraModel != null" >
         camera_model = #{cameraModel,jdbcType=VARCHAR},
@@ -221,17 +263,21 @@
         version = #{version,jdbcType=INTEGER},
       </if>
     </set>
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.dendnight.core.domain.ImageInf" >
     update image_inf
-    set height = #{height,jdbcType=INTEGER},
+    set md5 = #{md5,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      height = #{height,jdbcType=INTEGER},
       width = #{width,jdbcType=INTEGER},
+      thumbnail = #{thumbnail,jdbcType=VARCHAR},
+      original = #{original,jdbcType=VARCHAR},
       path = #{path,jdbcType=VARCHAR},
       longitude = #{longitude,jdbcType=DOUBLE},
       latitude = #{latitude,jdbcType=DOUBLE},
       readme = #{readme,jdbcType=VARCHAR},
-      count = #{count,jdbcType=INTEGER},
+      upload_count = #{uploadCount,jdbcType=INTEGER},
       camera_model = #{cameraModel,jdbcType=VARCHAR},
       camera_brand = #{cameraBrand,jdbcType=VARCHAR},
       lens_brand = #{lensBrand,jdbcType=VARCHAR},
@@ -243,7 +289,7 @@
       updated_by = #{updatedBy,jdbcType=INTEGER},
       deleted = #{deleted,jdbcType=TINYINT},
       version = #{version,jdbcType=INTEGER}
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
   
   <select id="count" parameterType="com.dendnight.core.criteria.ImageInfCriteria" resultType="java.lang.Integer">
@@ -275,5 +321,11 @@
 	<if test="pagesize != 0">
 		LIMIT #{offset}, #{pagesize}
 	</if>
+  </select>
+  
+  <select id="query" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+      <include refid="Base_Column_List" />
+    from image_inf where md5 = #{md5}
   </select>
 </mapper>

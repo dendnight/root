@@ -3,11 +3,19 @@ package com.dendnight.core.domain;
 import java.util.Date;
 
 public class ImageInf {
-    private String id;
+    private Integer id;
+
+    private String md5;
+
+    private String name;
 
     private Integer height;
 
     private Integer width;
+
+    private String thumbnail;
+
+    private String original;
 
     private String path;
 
@@ -17,7 +25,7 @@ public class ImageInf {
 
     private String readme;
 
-    private Integer count;
+    private Integer uploadCount;
 
     private String cameraModel;
 
@@ -41,12 +49,28 @@ public class ImageInf {
 
     private Integer version;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getMd5() {
+        return md5;
+    }
+
+    public void setMd5(String md5) {
+        this.md5 = md5 == null ? null : md5.trim();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
     }
 
     public Integer getHeight() {
@@ -63,6 +87,22 @@ public class ImageInf {
 
     public void setWidth(Integer width) {
         this.width = width;
+    }
+
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail == null ? null : thumbnail.trim();
+    }
+
+    public String getOriginal() {
+        return original;
+    }
+
+    public void setOriginal(String original) {
+        this.original = original == null ? null : original.trim();
     }
 
     public String getPath() {
@@ -97,12 +137,12 @@ public class ImageInf {
         this.readme = readme == null ? null : readme.trim();
     }
 
-    public Integer getCount() {
-        return count;
+    public Integer getUploadCount() {
+        return uploadCount;
     }
 
-    public void setCount(Integer count) {
-        this.count = count;
+    public void setUploadCount(Integer uploadCount) {
+        this.uploadCount = uploadCount;
     }
 
     public String getCameraModel() {

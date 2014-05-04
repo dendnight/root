@@ -47,7 +47,7 @@
 		    <interceptor-ref name="defaultStack"></interceptor-ref>
 		</action>
 	    
-	    <action name="upload" class="UploadImagesAction" >
+	    <action name="upload" class="UploadImageAction" >
 	        <interceptor-ref name="defaultStack"></interceptor-ref>
 	    </action>
 	    

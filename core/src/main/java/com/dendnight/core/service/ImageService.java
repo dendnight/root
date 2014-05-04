@@ -55,7 +55,7 @@ public interface ImageService {
 	 * @param info
 	 * @param id
 	 */
-	void delete(LoginInfo info, String id);
+	void delete(LoginInfo info, Integer id);
 
 	/**
 	 * 查询图片信息
@@ -64,5 +64,14 @@ public interface ImageService {
 	 * @param id
 	 * @return
 	 */
-	ImageInf query(LoginInfo info, String id);
+	ImageInf query(LoginInfo info, Integer id);
+
+	/**
+	 * 查询图片信息
+	 * 
+	 * @param info
+	 * @param md5
+	 * @return
+	 */
+	ImageInf query(LoginInfo info, String md5);
 }

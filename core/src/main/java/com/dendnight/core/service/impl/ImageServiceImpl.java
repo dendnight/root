@@ -51,16 +51,24 @@ public class ImageServiceImpl implements ImageService {
 			imageAss.setImageId(imageInf.getId());
 			imageAss.setUserId(info.getId());
 			imageAss.setCreatedBy(info.getId());
-			imageAss.setOldName(imageInf.getReadme());
+			imageAss.setImageName(imageInf.getName());
 			imageAssMapper.insertSelective(imageAss);
-
-			imageInf.setReadme(null);
 		}
 		imageInfMapper.insertSelective(imageInf);
 	}
 
 	@Override
 	public void update(LoginInfo info, ImageInf imageInf) {
+		// 为用户绑定图片
+		if (null != info) {
+			ImageAss imageAss = new ImageAss();
+			imageAss.setImageId(imageInf.getId());
+			imageAss.setUserId(info.getId());
+			imageAss.setCreatedBy(info.getId());
+			imageAss.setImageName(imageInf.getName());
+			imageAssMapper.insertSelective(imageAss);
+		}
+
 		imageInf.setDeleted(null);
 		imageInf.setUpdatedBy(0);
 		imageInf.setUpdatedTime(new Date());
@@ -88,12 +96,18 @@ public class ImageServiceImpl implements ImageService {
 	}
 
 	@Override
-	public void delete(LoginInfo info, String id) {
-		// TODO Auto-generated method stub
+	public ImageInf query(LoginInfo info, String md5) {
+		return imageInfMapper.query(md5);
 	}
 
 	@Override
-	public ImageInf query(LoginInfo info, String id) {
+	public void delete(LoginInfo info, Integer id) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public ImageInf query(LoginInfo info, Integer id) {
 		return imageInfMapper.selectByPrimaryKey(id);
 	}
 

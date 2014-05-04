@@ -7,9 +7,11 @@ public class ImageAss {
 
     private Integer userId;
 
-    private String imageId;
+    private Integer imageId;
 
-    private String oldName;
+    private String imageName;
+
+    private Byte ispublic;
 
     private Date createdTime;
 
@@ -19,7 +21,7 @@ public class ImageAss {
 
     private Integer updatedBy;
 
-    private Integer deleted;
+    private Byte deleted;
 
     private Integer versoin;
 
@@ -39,20 +41,28 @@ public class ImageAss {
         this.userId = userId;
     }
 
-    public String getImageId() {
+    public Integer getImageId() {
         return imageId;
     }
 
-    public void setImageId(String imageId) {
-        this.imageId = imageId == null ? null : imageId.trim();
+    public void setImageId(Integer imageId) {
+        this.imageId = imageId;
     }
 
-    public String getOldName() {
-        return oldName;
+    public String getImageName() {
+        return imageName;
     }
 
-    public void setOldName(String oldName) {
-        this.oldName = oldName == null ? null : oldName.trim();
+    public void setImageName(String imageName) {
+        this.imageName = imageName == null ? null : imageName.trim();
+    }
+
+    public Byte getIspublic() {
+        return ispublic;
+    }
+
+    public void setIspublic(Byte ispublic) {
+        this.ispublic = ispublic;
     }
 
     public Date getCreatedTime() {
@@ -87,11 +97,11 @@ public class ImageAss {
         this.updatedBy = updatedBy;
     }
 
-    public Integer getDeleted() {
+    public Byte getDeleted() {
         return deleted;
     }
 
-    public void setDeleted(Integer deleted) {
+    public void setDeleted(Byte deleted) {
         this.deleted = deleted;
     }
 

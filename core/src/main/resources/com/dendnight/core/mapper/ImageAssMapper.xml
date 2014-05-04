@@ -4,21 +4,22 @@
   <resultMap id="BaseResultMap" type="com.dendnight.core.domain.ImageAss" >
     <id column="image_ass_id" property="id" jdbcType="INTEGER" />
     <result column="image_ass_user_id" property="userId" jdbcType="INTEGER" />
-    <result column="image_ass_image_id" property="imageId" jdbcType="VARCHAR" />
-    <result column="image_ass_old_name" property="oldName" jdbcType="VARCHAR" />
+    <result column="image_ass_image_id" property="imageId" jdbcType="INTEGER" />
+    <result column="image_ass_image_name" property="imageName" jdbcType="VARCHAR" />
+    <result column="image_ass_ispublic" property="ispublic" jdbcType="TINYINT" />
     <result column="image_ass_created_time" property="createdTime" jdbcType="TIMESTAMP" />
     <result column="image_ass_created_by" property="createdBy" jdbcType="INTEGER" />
     <result column="image_ass_updated_time" property="updatedTime" jdbcType="TIMESTAMP" />
     <result column="image_ass_updated_by" property="updatedBy" jdbcType="INTEGER" />
-    <result column="image_ass_deleted" property="deleted" jdbcType="INTEGER" />
+    <result column="image_ass_deleted" property="deleted" jdbcType="TINYINT" />
     <result column="image_ass_versoin" property="versoin" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     image_ass.id as image_ass_id, image_ass.user_id as image_ass_user_id, image_ass.image_id as image_ass_image_id, 
-    image_ass.old_name as image_ass_old_name, image_ass.created_time as image_ass_created_time, 
-    image_ass.created_by as image_ass_created_by, image_ass.updated_time as image_ass_updated_time, 
-    image_ass.updated_by as image_ass_updated_by, image_ass.deleted as image_ass_deleted, 
-    image_ass.versoin as image_ass_versoin
+    image_ass.image_name as image_ass_image_name, image_ass.ispublic as image_ass_ispublic, 
+    image_ass.created_time as image_ass_created_time, image_ass.created_by as image_ass_created_by, 
+    image_ass.updated_time as image_ass_updated_time, image_ass.updated_by as image_ass_updated_by, 
+    image_ass.deleted as image_ass_deleted, image_ass.versoin as image_ass_versoin
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -39,8 +40,11 @@
       <if test="imageId != null" >
         image_id,
       </if>
-      <if test="oldName != null" >
-        old_name,
+      <if test="imageName != null" >
+        image_name,
+      </if>
+      <if test="ispublic != null" >
+        ispublic,
       </if>
       <if test="createdTime != null" >
         created_time,
@@ -66,10 +70,13 @@
         #{userId,jdbcType=INTEGER},
       </if>
       <if test="imageId != null" >
-        #{imageId,jdbcType=VARCHAR},
+        #{imageId,jdbcType=INTEGER},
       </if>
-      <if test="oldName != null" >
-        #{oldName,jdbcType=VARCHAR},
+      <if test="imageName != null" >
+        #{imageName,jdbcType=VARCHAR},
+      </if>
+      <if test="ispublic != null" >
+        #{ispublic,jdbcType=TINYINT},
       </if>
       <if test="createdTime != null" >
         #{createdTime,jdbcType=TIMESTAMP},
@@ -84,7 +91,7 @@
         #{updatedBy,jdbcType=INTEGER},
       </if>
       <if test="deleted != null" >
-        #{deleted,jdbcType=INTEGER},
+        #{deleted,jdbcType=TINYINT},
       </if>
       <if test="versoin != null" >
         #{versoin,jdbcType=INTEGER},
@@ -98,10 +105,13 @@
         user_id = #{userId,jdbcType=INTEGER},
       </if>
       <if test="imageId != null" >
-        image_id = #{imageId,jdbcType=VARCHAR},
+        image_id = #{imageId,jdbcType=INTEGER},
       </if>
-      <if test="oldName != null" >
-        old_name = #{oldName,jdbcType=VARCHAR},
+      <if test="imageName != null" >
+        image_name = #{imageName,jdbcType=VARCHAR},
+      </if>
+      <if test="ispublic != null" >
+        ispublic = #{ispublic,jdbcType=TINYINT},
       </if>
       <if test="createdTime != null" >
         created_time = #{createdTime,jdbcType=TIMESTAMP},
@@ -116,7 +126,7 @@
         updated_by = #{updatedBy,jdbcType=INTEGER},
       </if>
       <if test="deleted != null" >
-        deleted = #{deleted,jdbcType=INTEGER},
+        deleted = #{deleted,jdbcType=TINYINT},
       </if>
       <if test="versoin != null" >
         versoin = #{versoin,jdbcType=INTEGER},
@@ -127,13 +137,14 @@
   <update id="updateByPrimaryKey" parameterType="com.dendnight.core.domain.ImageAss" >
     update image_ass
     set user_id = #{userId,jdbcType=INTEGER},
-      image_id = #{imageId,jdbcType=VARCHAR},
-      old_name = #{oldName,jdbcType=VARCHAR},
+      image_id = #{imageId,jdbcType=INTEGER},
+      image_name = #{imageName,jdbcType=VARCHAR},
+      ispublic = #{ispublic,jdbcType=TINYINT},
       created_time = #{createdTime,jdbcType=TIMESTAMP},
       created_by = #{createdBy,jdbcType=INTEGER},
       updated_time = #{updatedTime,jdbcType=TIMESTAMP},
       updated_by = #{updatedBy,jdbcType=INTEGER},
-      deleted = #{deleted,jdbcType=INTEGER},
+      deleted = #{deleted,jdbcType=TINYINT},
       versoin = #{versoin,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
