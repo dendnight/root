@@ -71,7 +71,7 @@
 					<!-- 把文件压缩成一行 -->
 					<linebreakpos>-1</linebreakpos>
 					<!-- 指定需要压缩文件的目录 -->
-					<sourceDirectory>${basedir}</sourceDirectory>
+					<sourceDirectory>${basedir}/src</sourceDirectory>
 				</configuration>
 			</plugin>
 

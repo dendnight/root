@@ -27,7 +27,6 @@ import com.drew.metadata.Directory;
 import com.drew.metadata.Metadata;
 import com.drew.metadata.exif.ExifIFD0Directory;
 import com.drew.metadata.exif.ExifSubIFDDirectory;
-import com.drew.metadata.exif.GpsDirectory;
 
 /**
  * 上传图片
@@ -79,33 +78,21 @@ public class UploadImageAction extends BaseAction {
 			return JSON;
 		}
 
-		ParamSys param = paramSysService.query(info(), "IMG_ROOT");// TODO
-		if (null == param) {
+		if (!"image/jpeg".equalsIgnoreCase(imageContentType)) {
 			json.put(S, 0);
-			json.put(M, "参数错误");
+			json.put(M, "请上传jpg或jpeg相片");
 			return JSON;
-
 		}
-		String root = param.getValue();
 
-		// int width = 0;// FIXME 图片属性
-		// int height = 0;
 		String md5 = "";
-		// String path = "";
 		ImageInf imageInf = null;
 		try {
 
 			md5 = Md5Utils.getMd5ByFile(image);
 			imageInf = imageService.query(info(), md5);
 			if (null == imageInf) {
-
-				String thumbnail = UUID.randomUUID().toString() + ".jpg";
-				// 生成缩略图
-				Builder<File> file = Thumbnails.of(image).width(220).outputFormat("jpg");
-				file.toFile(root + thumbnail);
-				// 获取缩略图高度
-				BufferedImage bi = file.asBufferedImage();
-				int height = bi.getHeight();
+				ParamSys param = paramSysService.query(info(), "IMG_ROOT");
+				String root = param.getValue();
 				String original = UUID.randomUUID().toString()
 						+ imageFileName.substring(imageFileName.lastIndexOf('.'));
 				// 创建一个新 File 实例
@@ -119,11 +106,19 @@ public class UploadImageAction extends BaseAction {
 				// 将原文件保存到硬盘上,Struts2会帮我们自动删除临时文件
 				FileUtils.copyFile(image, imageFile);
 
+				// 生成缩略图
+				String thumbnail = UUID.randomUUID().toString() + ".jpg";
+				Builder<File> file = Thumbnails.of(image).width(220).outputFormat("jpg");
+				file.toFile(root + thumbnail);
+				// 获取缩略图高度
+				BufferedImage bi = file.asBufferedImage();
+				int height = bi.getHeight();
+
 				// 获取Exif信息
 				Metadata metadata = ImageMetadataReader.readMetadata(image);
 				Directory exifIFD0 = metadata.getDirectory(ExifIFD0Directory.class);
 				Directory exifSubIF = metadata.getDirectory(ExifSubIFDDirectory.class);
-				Directory gps = metadata.getDirectory(GpsDirectory.class);
+				// Directory gps = metadata.getDirectory(GpsDirectory.class);
 
 				imageInf = new ImageInf();
 				imageInf.setHeight(height);
@@ -131,15 +126,19 @@ public class UploadImageAction extends BaseAction {
 
 				imageInf.setMd5(md5);
 				imageInf.setPath(root);
-				imageInf.setOriginal(original);
+				root = root.substring(root.indexOf("pictures"));// XXX 去掉前缀
 
-				imageInf.setThumbnail(thumbnail);
+				imageInf.setOriginal(root + original);
+				imageInf.setThumbnail(root + thumbnail);
 				imageInf.setName(imageFileName);
-				imageInf.setCameraBrand(exifIFD0.getString(ExifIFD0Directory.TAG_MAKE));
 
+				imageInf.setCameraBrand(exifIFD0.getString(ExifIFD0Directory.TAG_MAKE));
 				imageInf.setCameraModel(exifIFD0.getString(ExifIFD0Directory.TAG_MODEL));
 				imageInf.setLensBrand(exifSubIF.getString(ExifSubIFDDirectory.TAG_LENS_MAKE));
+
 				imageInf.setLensModel(exifSubIF.getString(ExifSubIFDDirectory.TAG_LENS_MODEL));
+				imageInf.setProgramName(exifIFD0.getString(ExifIFD0Directory.TAG_SOFTWARE));
+				imageInf.setDateTaken(exifSubIF.getDate(ExifSubIFDDirectory.TAG_DATETIME_ORIGINAL));
 
 				imageService.create(info(), imageInf);
 			} else {

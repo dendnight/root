@@ -4,7 +4,7 @@
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/page" prefix="page"%>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator"%>
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh">
 	<head>
 		<title><decorator:title default="Dendnight"/></title>
 		<meta charset="UTF-8"/>
@@ -12,6 +12,7 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"/>
 	    <meta name="author" content="dendnight"/>
 	    <link rel="shortcut icon" href="http://dendnight.com/images/favicon.ico">
+		<link rel="stylesheet" href="css/nprogress.css"/>
 		
 		<decorator:head/>
     </head>
