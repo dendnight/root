@@ -11,7 +11,12 @@
 	<div id="gallery">
 	<s:iterator value="result.list" status="status">
 		<div class="item">
-			<img alt="" src='<s:property value="thumbnail"/>' width="<s:property value="width"/>" height="<s:property value="height"/>" />
+			<a href="<s:property value="original"/>">
+				<img class="lazy" src="images/grey.gif" data-original='<s:property value="thumbnail"/>' width="<s:property value="width"/>" height="<s:property value="height"/>" />
+			</a>
+			<div>
+				<a href="#">赞</a>123<a href="#">踩</a>12
+			</div>
 		</div>
 	</s:iterator>
 	</div>

@@ -1,12 +1,25 @@
 @charset "utf-8";
 
+body {
+	background: #eee;
+}
+
 img {
 	border: 0;
 }
 
+#gallery {
+	margin: 0 auto;
+	opacity: 0;
+}
+
 .item {
+	margin: 5px;
+	padding: 2px;
+	border: 1px solid #CCC;
 	-webkit-transition: all .7s ease-out .1s;
 	-moz-transition: all .7s ease-out .1s;
 	-o-transition: all .7s ease-out .1s;
-	transition: all .7s ease-out .1s
+	transition: all .7s ease-out .1s;
+	-webkit-transition: all .7s ease-out .1s;
 }

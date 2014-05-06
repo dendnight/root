@@ -4,15 +4,17 @@ head.load('js/libs/jquery.js', 'js/libs/jquery.form.js',
 
 head.ready(function() {
 	$(function() {
+		$('#gallery').animate({
+			opacity : '1'
+		});
+
+		$("img.lazy").lazyload({
+			effect : "fadeIn"
+		});
+
 		$("#gallery").masonry({
 			itemSelector : '.item',
-			columnWidth : 10,
-			isFitWidth : true,
-			animationOptions : {
-				queue : false,
-				duration : 5000,
-				speed : 100
-			}
+			isFitWidth : true
 		});
 
 		NProgress.done();
