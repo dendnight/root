@@ -21,6 +21,8 @@
 	</s:iterator>
 	</div>
 	
+	<div id="loading"></div>
+	
 	<div>
 		<script type="text/javascript" src="js/nprogress.js"></script>
 		<script type="text/javascript" src="js/head.load.js" data-headjs-load="js/gallery.js"></script>

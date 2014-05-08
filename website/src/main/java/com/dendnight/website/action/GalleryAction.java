@@ -53,7 +53,7 @@ public class GalleryAction extends BaseAction {
 			return JSON;
 		}
 
-		List<Map<String, Object>> thumbnail = new ArrayList<Map<String, Object>>();
+		List<Map<String, Object>> obj = new ArrayList<Map<String, Object>>();
 
 		ImageInfCriteria criteria = new ImageInfCriteria();
 		criteria.setPage(page);
@@ -62,11 +62,17 @@ public class GalleryAction extends BaseAction {
 			Map<String, Object> map = null;
 			for (ImageInf image : result.getList()) {
 				map = new HashMap<String, Object>();
-				map.put("path", image.getPath());
-				thumbnail.add(map);
+				map.put("original", image.getOriginal());
+				map.put("thumbnail", image.getThumbnail());
+				map.put("width", image.getWidth());
+				map.put("height", image.getHeight());
+				obj.add(map);
 			}
+			map = new HashMap<String, Object>();
+			map.put("totalPage", result.getPagination().getTotalPage());
+			obj.add(map);
 		}
-		json.put(O, thumbnail);
+		json.put(O, obj);
 		return JSON;
 	}
 

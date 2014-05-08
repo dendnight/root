@@ -4,6 +4,7 @@
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/page" prefix="page"%>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator"%>
 <!doctype html>
+<!--[if IE]><script>window.location.href="404.html";</script><![end if]-->
 <html lang="zh">
 	<head>
 		<title><decorator:title default="Dendnight"/></title>
