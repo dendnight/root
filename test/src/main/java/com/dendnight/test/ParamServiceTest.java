@@ -30,7 +30,7 @@ public class ParamServiceTest extends AbstractJUnit4SpringContextTests {
 
 			ParamSys paramSys = new ParamSys();
 			paramSys.setCode("IMG_ROOT");
-			paramSys.setValue("D:/Temp/pictures/fdsgfdsg/");
+			paramSys.setValue("D:/Temp/pictures/adease/");
 			paramSys.setName("图片根路径");
 			paramSys.setReadme("存放图片");
 			paramSysService.create(info, paramSys);
